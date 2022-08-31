@@ -1,172 +1,172 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 
 /// <summary>
-/// Ã“IƒNƒ‰ƒX
-/// ‚Ù‚©‚ÌGameObject‚ÉƒAƒ^ƒbƒ`‚·‚é•K—v‚ª‚È‚¢‚Ì‚ÅA
-/// Monobehaviour‚âSingleton‚ÍŒp³‚·‚é•K—v‚ª‚È‚¢
+/// é™çš„ã‚¯ãƒ©ã‚¹
+/// ã»ã‹ã®GameObjectã«ã‚¢ã‚¿ãƒƒãƒã™ã‚‹å¿…è¦ãŒãªã„ã®ã§ã€
+/// Monobehaviourã‚„Singletonã¯ç¶™æ‰¿ã™ã‚‹å¿…è¦ãŒãªã„
 /// </summary>
 public static class Utility
 {
     /// <summary>
-    /// ”’l‚ğƒJƒXƒ^ƒ}ƒCƒY‚µ‚Ä•¶š—ñ‚É•ÏŠ·‚·‚é
+    /// æ•°å€¤ã‚’ã‚«ã‚¹ã‚¿ãƒã‚¤ã‚ºã—ã¦æ–‡å­—åˆ—ã«å¤‰æ›ã™ã‚‹
     /// </summary>
-    /// <param name="value">•¶š—ñ‚É•ÏŠ·‚·‚é”’l</param>
-    /// <param name="format">•¶š—ñ‚É•ÏŠ·‚·‚éÛ‚ÌƒtƒH[ƒ}ƒbƒg</param>
-    /// <param name="maxNumber">”’l‚ÌÅ‘åŒ…”</param>
-    /// <param name="pushStr">æ“ª‚É‘}“ü‚·‚é•¶š</param>
-    /// <returns>ƒJƒXƒ^ƒ}ƒCƒY‚µ‚½•¶š</returns>
+    /// <param name="value">æ–‡å­—åˆ—ã«å¤‰æ›ã™ã‚‹æ•°å€¤</param>
+    /// <param name="format">æ–‡å­—åˆ—ã«å¤‰æ›ã™ã‚‹éš›ã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ</param>
+    /// <param name="maxNumber">æ•°å€¤ã®æœ€å¤§æ¡æ•°</param>
+    /// <param name="pushStr">å…ˆé ­ã«æŒ¿å…¥ã™ã‚‹æ–‡å­—</param>
+    /// <returns>ã‚«ã‚¹ã‚¿ãƒã‚¤ã‚ºã—ãŸæ–‡å­—</returns>
     public static string ValueCustomFrontString(in float value,in string format,in int maxNumber,in string pushStr)
     {
-        //ƒxƒNƒgƒ‹‚ğ®”‚Ì‹ô”‚ÉŠÛ‚ß‚Ş
+        //ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ•´æ•°ã®å¶æ•°ã«ä¸¸ã‚è¾¼ã‚€
         string str = value.ToString(format);
 
-        //for•ª‚ğ‰ñ‚·”‚ğ‹‚ß‚é
+        //foråˆ†ã‚’å›ã™æ•°ã‚’æ±‚ã‚ã‚‹
         int num = Mathf.Abs(str.Length - maxNumber);
 
         for (int i = 0; i < num; i++)
         {
-            //Œ…”‚É‰‚¶‚ÄA•¶š‚Ìæ“ª‚Éw’è‚µ‚½•¶š‚ğ‘}“ü‚·‚é
+            //æ¡æ•°ã«å¿œã˜ã¦ã€æ–‡å­—ã®å…ˆé ­ã«æŒ‡å®šã—ãŸæ–‡å­—ã‚’æŒ¿å…¥ã™ã‚‹
             str = str.Insert(0, pushStr);
         }
 
-        //ƒJƒXƒ^ƒ}ƒCƒY‚µ‚½•¶š—ñ‚ğ•Ô‚·
+        //ã‚«ã‚¹ã‚¿ãƒã‚¤ã‚ºã—ãŸæ–‡å­—åˆ—ã‚’è¿”ã™
         return str;
     }
 
     /// <summary>
-    /// 2“_‚ÌŠÔ‚ÌŠp“x‚ğ‹‚ß‚é
+    /// 2ç‚¹ã®é–“ã®è§’åº¦ã‚’æ±‚ã‚ã‚‹
     /// </summary>
-    /// <param name="start">n“_</param>
-    /// <param name="target">I“_</param>
-    /// <returns>Šp“xiDegreej</returns>
+    /// <param name="start">å§‹ç‚¹</param>
+    /// <param name="target">çµ‚ç‚¹</param>
+    /// <returns>è§’åº¦ï¼ˆDegreeï¼‰</returns>
     public static float Atan2DegAngle(in Vector2 start,in Vector2 target)
     {
-        //ƒxƒNƒgƒ‹‚Ì‹——£‚ğZo‚·‚é
+        //ãƒ™ã‚¯ãƒˆãƒ«ã®è·é›¢ã‚’ç®—å‡ºã™ã‚‹
         Vector2 length = target - start;
 
-        //Šp“x‚ğZo‚·‚éiRadianj
+        //è§’åº¦ã‚’ç®—å‡ºã™ã‚‹ï¼ˆRadianï¼‰
         float radian = Mathf.Atan2(length.x, length.y);
 
-        //Radian‚ğDegree‚É•ÏŠ·‚·‚é
+        //Radianã‚’Degreeã«å¤‰æ›ã™ã‚‹
         float degree = radian * Mathf.Rad2Deg;
 
-        //Degree‚ğ•Ô‚·
+        //Degreeã‚’è¿”ã™
         return degree;
     }
 
     /// <summary>
-    /// 2“_ŠÔ‚ÌƒxƒNƒgƒ‹‚Ì’·‚³‚ğ‹‚ß‚é
+    /// 2ç‚¹é–“ã®ãƒ™ã‚¯ãƒˆãƒ«ã®é•·ã•ã‚’æ±‚ã‚ã‚‹
     /// </summary>
-    /// <param name="start">ŒvZ‚Ì‚à‚Æ‚Æ‚È‚éÀ•W</param>
-    /// <param name="target">ŒvZ‚·‚é‘Šè‚ÌÀ•W</param>
-    /// <returns>ƒxƒNƒgƒ‹‚Ì’·‚³</returns>
+    /// <param name="start">è¨ˆç®—ã®ã‚‚ã¨ã¨ãªã‚‹åº§æ¨™</param>
+    /// <param name="target">è¨ˆç®—ã™ã‚‹ç›¸æ‰‹ã®åº§æ¨™</param>
+    /// <returns>ãƒ™ã‚¯ãƒˆãƒ«ã®é•·ã•</returns>
     public static float VectorLength(in Vector3 start,in Vector3 target)
     {
-        //ƒxƒNƒgƒ‹‚Ì‹——£‚ğZo‚·‚é
+        //ãƒ™ã‚¯ãƒˆãƒ«ã®è·é›¢ã‚’ç®—å‡ºã™ã‚‹
         Vector3 length = target - start;
 
-        //ƒxƒNƒgƒ‹‚Ì’·‚³‚ğ‹‚ß‚Ä•Ô‚·
+        //ãƒ™ã‚¯ãƒˆãƒ«ã®é•·ã•ã‚’æ±‚ã‚ã¦è¿”ã™
         return length.magnitude;
     }
 
     /// <summary>
-    /// Œ»İ‚Ì—Í‚ğZo‚·‚é
+    /// ç¾åœ¨ã®åŠ›ã‚’ç®—å‡ºã™ã‚‹
     /// </summary>
-    /// <param name="force">Œ»İ‚Ì—Í</param>
-    /// <param name="scalar">ƒXƒJƒ‰’l</param>
+    /// <param name="force">ç¾åœ¨ã®åŠ›</param>
+    /// <param name="scalar">ã‚¹ã‚«ãƒ©å€¤</param>
     /// <returns></returns>
     public static float ForceFloat(in Vector3 force,in float scalar)
     {
-        //ƒxƒNƒgƒ‹‚Ì‘å‚«‚³‚ğƒXƒJƒ‰”{‚·‚é
+        //ãƒ™ã‚¯ãƒˆãƒ«ã®å¤§ãã•ã‚’ã‚¹ã‚«ãƒ©å€ã™ã‚‹
         float length = force.magnitude * scalar;
 
-        //Zo‚µ‚½’l‚ğ•Ô‚·
+        //ç®—å‡ºã—ãŸå€¤ã‚’è¿”ã™
         return length;
     }
 
     /// <summary>
-    /// w’è‚µ‚½Sprite‚ÌƒAƒ‹ƒtƒ@’l‚ğ•ÏX‚·‚é
+    /// æŒ‡å®šã—ãŸSpriteã®ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã‚’å¤‰æ›´ã™ã‚‹
     /// </summary>
-    /// <param name="sprite">‘ÎÛ‚Ì‰æ‘œ</param>
-    /// <param name="alfa">“§–¾“x</param>
-    /// <returns>V‚½‚Éİ’è‚µ‚½F</returns>
+    /// <param name="sprite">å¯¾è±¡ã®ç”»åƒ</param>
+    /// <param name="alfa">é€æ˜åº¦</param>
+    /// <returns>æ–°ãŸã«è¨­å®šã—ãŸè‰²</returns>
     public static Color SetColorOpacity(SpriteRenderer sprite,in float alfa)
     {
-        //Fî•ñ‚ğæ“¾‚·‚é
+        //è‰²æƒ…å ±ã‚’å–å¾—ã™ã‚‹
         Color color = sprite.color;
 
-        //V‚½‚ÈF‚ğİ’è‚·‚é
+        //æ–°ãŸãªè‰²ã‚’è¨­å®šã™ã‚‹
         Color newColor = new Color(color.r, color.g, color.b, alfa);
 
-        //İ’è‚µ‚½F‚ğ•Ô‚·
+        //è¨­å®šã—ãŸè‰²ã‚’è¿”ã™
         return newColor;
     }
 
     /// <summary>
-    /// ƒeƒNƒXƒ`ƒƒ‚ÌF‚ğ‡¬‚·‚éŠÖ”
+    /// ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®è‰²ã‚’åˆæˆã™ã‚‹é–¢æ•°
     /// </summary>
-    /// <param name="sprite">‘ÎÛ‚Ì‰æ‘œ</param>
-    /// <param name="color1">‡¬‚·‚éF</param>
-    /// <param name="color2">‡¬‚·‚éF</param>
-    /// <returns>‡¬Œã‚ÌF</returns>
+    /// <param name="sprite">å¯¾è±¡ã®ç”»åƒ</param>
+    /// <param name="color1">åˆæˆã™ã‚‹è‰²</param>
+    /// <param name="color2">åˆæˆã™ã‚‹è‰²</param>
+    /// <returns>åˆæˆå¾Œã®è‰²</returns>
     public static Color SetColorAddtive(Color color1,Color color2,
         Action<SpriteRenderer,float> action = null,SpriteRenderer sprite = null,in float alfa = 1.0f)
     {
-        //F‚ğŠ|‚¯‡‚í‚¹‚é
+        //è‰²ã‚’æ›ã‘åˆã‚ã›ã‚‹
         Color color = color1 * color2;
 
-        //ƒAƒ‹ƒtƒ@’l‚ğ•ÏX‚·‚é
+        //ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã‚’å¤‰æ›´ã™ã‚‹
         action?.Invoke(sprite,alfa);
 
-        //•ÏX‚µ‚½F‚ğ•Ô‚·
+        //å¤‰æ›´ã—ãŸè‰²ã‚’è¿”ã™
         return color;
     }
 
     /// <summary>
-    /// ƒNƒ‰ƒX–¼‚©‚çType‚ğæ“¾‚·‚éŠÖ”
+    /// ã‚¯ãƒ©ã‚¹åã‹ã‚‰Typeã‚’å–å¾—ã™ã‚‹é–¢æ•°
     /// </summary>
-    /// <param name="name">ƒNƒ‰ƒX–¼</param>
+    /// <param name="name">ã‚¯ãƒ©ã‚¹å</param>
     /// <returns>Type</returns>
     public static Type GetTypeClassName(in string name)
     {
-        //w’è‚µ‚½ƒNƒ‰ƒX–¼‚ÌType‚ğæ“¾‚·‚é
+        //æŒ‡å®šã—ãŸã‚¯ãƒ©ã‚¹åã®Typeã‚’å–å¾—ã™ã‚‹
         Type type = System.Reflection.Assembly.Load("UnityEngine.dll").GetType(name);
 
-        //Type‚ğ•Ô‚·
+        //Typeã‚’è¿”ã™
         return type;
     }
 
     /// <summary>
-    /// ŒvZŒ‹‰Ê‚ªƒ}ƒCƒiƒX‚É‚È‚Á‚½’´‰ß•ª‚ğ‹‚ß‚é
+    /// è¨ˆç®—çµæœãŒãƒã‚¤ãƒŠã‚¹ã«ãªã£ãŸè¶…éåˆ†ã‚’æ±‚ã‚ã‚‹
     /// </summary>
-    /// <param name="hp">Œ»İ‚ÌHp</param>
-    /// <param name="damage">ó‚¯‚½ƒ_ƒ[ƒW</param>
-    /// <param name="max">Hp‚ÌÅ‘å’l</param>
+    /// <param name="hp">ç¾åœ¨ã®Hp</param>
+    /// <param name="damage">å—ã‘ãŸãƒ€ãƒ¡ãƒ¼ã‚¸</param>
+    /// <param name="max">Hpã®æœ€å¤§å€¤</param>
     /// <returns></returns>
     public static float OverClampDecrease(float hp, float damage, float max)
     {
-        //Hp‚Ì”ÍˆÍ‚ğŒÀ’è‚·‚é
+        //Hpã®ç¯„å›²ã‚’é™å®šã™ã‚‹
         float over = Mathf.Clamp(hp - damage, -max, 0);
 
-        //’´‚¦‚½•ª‚Ì’l‚ğ‹‚ß‚é
+        //è¶…ãˆãŸåˆ†ã®å€¤ã‚’æ±‚ã‚ã‚‹
         float abs = Mathf.Abs(over);
 
-        //’´‚¦‚½•ª‚Ì’l‚ğ•Ô‚·
+        //è¶…ãˆãŸåˆ†ã®å€¤ã‚’è¿”ã™
         return abs;
     }
 
     /// <summary>
-    /// ŒvZŒ‹‰Ê‚ğâ‘Î’l‚Å•Ô‚·
+    /// è¨ˆç®—çµæœã‚’çµ¶å¯¾å€¤ã§è¿”ã™
     /// </summary>
-    /// <param name="i1">‘æ1ˆø”</param>
-    /// <param name="i2">‘æ2ˆø”</param>
-    /// <returns>ŒvZŒ‹‰Ê(â‘Î’l)</returns>
+    /// <param name="i1">ç¬¬1å¼•æ•°</param>
+    /// <param name="i2">ç¬¬2å¼•æ•°</param>
+    /// <returns>è¨ˆç®—çµæœ(çµ¶å¯¾å€¤)</returns>
     public static int AbsCaclInt(int i1,int i2)
     {
-        //ŒvZŒ‹‰Ê‚ğâ‘Î’l‚Å•Ô‚·
+        //è¨ˆç®—çµæœã‚’çµ¶å¯¾å€¤ã§è¿”ã™
         return Mathf.Abs(i1 - i2);
     }
 }

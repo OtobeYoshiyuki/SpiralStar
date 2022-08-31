@@ -1,76 +1,76 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Star‚Ìƒ`ƒƒ[ƒW‚·‚éUI‚ğŠÇ—‚·‚éƒNƒ‰ƒX
-/// Game’†‚É1‚Â‚µ‚©‘¶İ‚µ‚È‚¢‚Ì‚ÅASingleton‚ğŒp³
+/// Starã®ãƒãƒ£ãƒ¼ã‚¸ã™ã‚‹UIã‚’ç®¡ç†ã™ã‚‹ã‚¯ãƒ©ã‚¹
+/// Gameä¸­ã«1ã¤ã—ã‹å­˜åœ¨ã—ãªã„ã®ã§ã€Singletonã‚’ç¶™æ‰¿
 /// </summary>
 public class TimerUI : Singleton<TimerUI>
 {
     /// <summary>
-    /// TextComponent‚ğ‚ÂGameObject
-    /// Inspecter‚©‚ç•ÒW‚Å‚«‚é‚æ‚¤‚É‚·‚é
+    /// TextComponentã‚’æŒã¤GameObject
+    /// Inspecterã‹ã‚‰ç·¨é›†ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
     /// </summary>
     [SerializeField]
     private GameObject m_textObject = null;
 
     /// <summary>
-    /// 60~0•b‚ğ•\‚·GameObject
-    /// Inspecter‚©‚ç•ÒW‚Å‚«‚é‚æ‚¤‚É‚·‚é
+    /// 60~0ç§’ã‚’è¡¨ã™GameObject
+    /// Inspecterã‹ã‚‰ç·¨é›†ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
     /// </summary>
     [SerializeField]
     private GameObject m_timerNormalObject = null;
 
     /// <summary>
-    /// 120~60•b‚ğ•\‚·GameObject
-    /// Inspecter‚©‚ç•ÒW‚Å‚«‚é‚æ‚¤‚É‚·‚é
+    /// 120~60ç§’ã‚’è¡¨ã™GameObject
+    /// Inspecterã‹ã‚‰ç·¨é›†ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
     /// </summary>
     [SerializeField]
     private GameObject m_timerOverObject = null;
 
     /// <summary>
-    /// TextObject‚ÌTextComponent‚ğŠi”[‚·‚é•Ï”
+    /// TextObjectã®TextComponentã‚’æ ¼ç´ã™ã‚‹å¤‰æ•°
     /// </summary>
     private Text m_timerTextUI = null;
 
     /// <summary>
-    /// Œ»İ‚ÌŠÔ‚ğ•\‚·•Ï”
+    /// ç¾åœ¨ã®æ™‚é–“ã‚’è¡¨ã™å¤‰æ•°
     /// </summary>
     private float m_time = 0.0f;
 
     /// <summary>
-    /// ŠÔ‚ÌŒÀŠE’n‚ğ•\‚·•Ï”i60~120j
+    /// æ™‚é–“ã®é™ç•Œåœ°ã‚’è¡¨ã™å¤‰æ•°ï¼ˆ60~120ï¼‰
     /// </summary>
     private float m_limitTime = 0.0f;
 
     /// <summary>
-    /// ŠJn‚·‚éŠÔ
-    /// ’è”
+    /// é–‹å§‹ã™ã‚‹æ™‚é–“
+    /// å®šæ•°
     /// </summary>
     public const float START_TIME = 60.0f;
 
     /// <summary>
-    /// ŠÔ‚ÌŒÀŠE’l‚ÌÅ‘å‚ğ•\‚·
-    /// ’è”
+    /// æ™‚é–“ã®é™ç•Œå€¤ã®æœ€å¤§ã‚’è¡¨ã™
+    /// å®šæ•°
     /// </summary>
     public const float MAX_LIMIT_TIME = 120.0f;
 
     /// <summary>
-    /// Å‘å‚ÌŒ…”
-    /// ’è”
+    /// æœ€å¤§ã®æ¡æ•°
+    /// å®šæ•°
     /// </summary>
     public const int MAX_NUMBER = 3;
 
     /// <summary>
-    /// ƒ^ƒCƒ}[‚ÌI—¹‚ğŒŸ’m‚·‚éƒtƒ‰ƒO
+    /// ã‚¿ã‚¤ãƒãƒ¼ã®çµ‚äº†ã‚’æ¤œçŸ¥ã™ã‚‹ãƒ•ãƒ©ã‚°
     /// </summary>
     private bool m_finishTimer = false;
 
     /// <summary>
-    /// ƒ^ƒCƒ}[‚ğXV‚·‚éƒtƒ‰ƒO
-    /// Inspecter‚©‚ç•ÒW‚Å‚«‚é‚æ‚¤‚É‚·‚é
+    /// ã‚¿ã‚¤ãƒãƒ¼ã‚’æ›´æ–°ã™ã‚‹ãƒ•ãƒ©ã‚°
+    /// Inspecterã‹ã‚‰ç·¨é›†ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
     /// </summary>
     [SerializeField]
     private bool m_updateTimer = false;
@@ -78,72 +78,72 @@ public class TimerUI : Singleton<TimerUI>
     // Update is called once per frame
     void Update()
     {
-        //ImageComponent‚Ì‰Šú‰»
+        //ImageComponentã®åˆæœŸåŒ–
         Image timerImage = null;
 
-        //”ä—¦‚ğ‹‚ß‚é•Ï”‚Ì‰Šú‰»
+        //æ¯”ç‡ã‚’æ±‚ã‚ã‚‹å¤‰æ•°ã®åˆæœŸåŒ–
         float ratio = 0.0f;
 
-        //I—¹ƒtƒ‰ƒO‚ªƒIƒ“‚ÌAˆÈ~‚Ìˆ—‚Í”ò‚Î‚·
+        //çµ‚äº†ãƒ•ãƒ©ã‚°ãŒã‚ªãƒ³ã®æ™‚ã€ä»¥é™ã®å‡¦ç†ã¯é£›ã°ã™
         if (m_finishTimer) return;
 
-        //Œ»İ‚ÌŠÔ‚ª61~120•b‚ÌŠÔ‚Ì
+        //ç¾åœ¨ã®æ™‚é–“ãŒ61~120ç§’ã®é–“ã®æ™‚
         if (m_time <= MAX_LIMIT_TIME && m_time > START_TIME)
         {
-            //ImageComponent‚ğæ“¾‚·‚é
+            //ImageComponentã‚’å–å¾—ã™ã‚‹
             timerImage = m_timerOverObject.GetComponent<Image>();
 
-            //ŠÔ‚Ì”ä—¦‚ğæ“¾‚·‚é
+            //æ™‚é–“ã®æ¯”ç‡ã‚’å–å¾—ã™ã‚‹
             ratio = m_time / MAX_LIMIT_TIME;
         }
-        //Œ»İ‚ÌŠÔ‚ª0~60•b‚ÌŠÔ‚Ì
+        //ç¾åœ¨ã®æ™‚é–“ãŒ0~60ç§’ã®é–“ã®æ™‚
         else
         {
-            //ImageComponent‚ğæ“¾‚·‚é
+            //ImageComponentã‚’å–å¾—ã™ã‚‹
             timerImage = m_timerNormalObject.GetComponent<Image>();
 
-            //ŠÔ‚Ì”ä—¦‚ğæ“¾‚·‚é
+            //æ™‚é–“ã®æ¯”ç‡ã‚’å–å¾—ã™ã‚‹
             ratio = m_time / START_TIME;
         }
 
-        //ŠÔ‚ğXV‚·‚é
+        //æ™‚é–“ã‚’æ›´æ–°ã™ã‚‹
         m_time -= Time.deltaTime;
 
-        //§ŒÀŠÔ‚ªØ‚ê‚½‚ç
+        //åˆ¶é™æ™‚é–“ãŒåˆ‡ã‚ŒãŸã‚‰
         if (m_time < 0.0f)
         {
-            //ŠÔ‚ğƒ[ƒ‚É‚·‚é
+            //æ™‚é–“ã‚’ã‚¼ãƒ­ã«ã™ã‚‹
             m_time = 0.0f;
 
-            //I—¹ƒtƒ‰ƒO‚ğ‹N‚±‚·
+            //çµ‚äº†ãƒ•ãƒ©ã‚°ã‚’èµ·ã“ã™
             m_finishTimer = true;
 
         }
-        //ƒ^ƒCƒ}[‚ÌUI‚ğXV‚·‚é
+        //ã‚¿ã‚¤ãƒãƒ¼ã®UIã‚’æ›´æ–°ã™ã‚‹
         timerImage.fillAmount = ratio;
 
-        //Œ»İ‚ÌŠÔ‚ğXV‚·‚é
+        //ç¾åœ¨ã®æ™‚é–“ã‚’æ›´æ–°ã™ã‚‹
         m_timerTextUI.text = Utility.ValueCustomFrontString(m_time, "f0", MAX_NUMBER, "0");
     }
 
     /// <summary>
-    /// ‰Šú‰»ˆ—
+    /// åˆæœŸåŒ–å‡¦ç†
     /// </summary>
     protected override void Init() 
     {
-        //TextComponent‚ğæ“¾
+        //TextComponentã‚’å–å¾—
         m_timerTextUI = m_textObject.GetComponent<Text>();
 
-        //ŠÔ‚ğ‰Šú‰»‚·‚é
+        //æ™‚é–“ã‚’åˆæœŸåŒ–ã™ã‚‹
         m_time = START_TIME;
         m_limitTime = START_TIME;
 
-        //‰Šúƒtƒ‰ƒO‚ğİ’è‚·‚é
+        //åˆæœŸãƒ•ãƒ©ã‚°ã‚’è¨­å®šã™ã‚‹
         m_finishTimer = false;
     }
 
     /// <summary>
-    /// ”pŠüˆ—
+    /// å»ƒæ£„å‡¦ç†
     /// </summary>
     protected override void Release() 
     { 

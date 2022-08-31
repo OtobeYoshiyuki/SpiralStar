@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,34 +7,34 @@ using System;
 public class HpGageUI : Singleton<HpGageUI>
 {
     /// <summary>
-    /// HPƒQ[ƒW‚Ì‰Šú‰»‚Ìî•ñ
+    /// HPã‚²ãƒ¼ã‚¸ã®åˆæœŸåŒ–ã®æƒ…å ±
     /// </summary>
     enum HPGAGE_CHILD_INIT : int
     {
-        FRONT = 5,//‘O–Ê‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-        BACK = 4,//Œã–Ê‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+        FRONT = 5,//å‰é¢ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
+        BACK = 4,//å¾Œé¢ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
     }
 
     /// <summary>
-    /// ”z—ñ‚Ì•â³Œã‚Ì’l
+    /// é…åˆ—ã®è£œæ­£å¾Œã®å€¤
     /// </summary>
     public const int REVERS_ELEMENT = (int)HPGAGE_CHILD_INIT.FRONT;
 
     /// <summary>
-    /// ƒQ[ƒW‚ÌŠÇ—ƒNƒ‰ƒX
+    /// ã‚²ãƒ¼ã‚¸ã®ç®¡ç†ã‚¯ãƒ©ã‚¹
     /// </summary>
     private GageManager m_gageManager = new GageManager();
 
     /// <summary>
-    /// ƒAƒjƒ[ƒVƒ‡ƒ“ƒJ[ƒu
-    /// Inspecter‚©‚ç•ÒW‚Å‚«‚é‚æ‚¤‚É‚·‚é
+    /// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚«ãƒ¼ãƒ–
+    /// Inspecterã‹ã‚‰ç·¨é›†ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
     /// </summary>
     [SerializeField]
     private AnimationCurve m_damageCurve = null;
 
     /// <summary>
-    /// ƒAƒjƒ[ƒVƒ‡ƒ“ƒJ[ƒu
-    /// Inspecter‚©‚ç•ÒW‚Å‚«‚é‚æ‚¤‚É‚·‚é
+    /// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚«ãƒ¼ãƒ–
+    /// Inspecterã‹ã‚‰ç·¨é›†ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
     /// </summary>
     [SerializeField]
     private AnimationCurve m_healCurve = null;
@@ -42,62 +42,62 @@ public class HpGageUI : Singleton<HpGageUI>
     // Update is called once per frame
     void Update()
     {
-        //gageManager‚ÌXVˆ—
+        //gageManagerã®æ›´æ–°å‡¦ç†
         m_gageManager.UpdateGageManager();
     }
 
     /// <summary>
-    /// ‰Šú‰»ˆ—
+    /// åˆæœŸåŒ–å‡¦ç†
     /// </summary>
     protected override void Init()
     {
-        //ƒ‹[ƒv‚Å‰ñ‚·’l‚ğ”z—ñ‚É’Ç‰Á‚·‚é
+        //ãƒ«ãƒ¼ãƒ—ã§å›ã™å€¤ã‚’é…åˆ—ã«è¿½åŠ ã™ã‚‹
         List<HPGAGE_CHILD_INIT> _CHILD_INITs = new List<HPGAGE_CHILD_INIT> { HPGAGE_CHILD_INIT.FRONT, HPGAGE_CHILD_INIT.BACK };
 
         foreach(HPGAGE_CHILD_INIT _CHILD_INIT in _CHILD_INITs)
         {
-            //ƒQ[ƒW‚ÌƒAƒjƒ[ƒVƒ‡ƒ“‚ğ¶¬‚·‚é
+            //ã‚²ãƒ¼ã‚¸ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’ç”Ÿæˆã™ã‚‹
             GageAnimation animation = new GageAnimation();
 
-            //q‹Ÿ‚ÉƒAƒ^ƒbƒ`‚³‚ê‚Ä‚¢‚éImageComponent‚ğİ’è‚·‚é
+            //å­ä¾›ã«ã‚¢ã‚¿ãƒƒãƒã•ã‚Œã¦ã„ã‚‹ImageComponentã‚’è¨­å®šã™ã‚‹
             animation.gage = transform.GetChild((int)_CHILD_INIT).gameObject.GetComponent<Image>();
 
-            //GageManager‚ÉƒAƒjƒ[ƒVƒ‡ƒ“‚ğ’Ç‰Á‚·‚é
+            //GageManagerã«ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’è¿½åŠ ã™ã‚‹
             m_gageManager.AddGage(animation);
         }
 
     }
 
     /// <summary>
-    /// ”pŠüˆ—
+    /// å»ƒæ£„å‡¦ç†
     /// </summary>
     protected override void Release()
     {
     }
 
     /// <summary>
-    /// ƒQ[ƒW‚Ìƒ_ƒ[ƒWƒAƒjƒ[ƒVƒ‡ƒ“‚ğs‚¤
+    /// ã‚²ãƒ¼ã‚¸ã®ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’è¡Œã†
     /// </summary>
-    /// <param name="self">©•ª©g</param>
+    /// <param name="self">è‡ªåˆ†è‡ªèº«</param>
     public void OnGageDamageAnimation(StarBase self)
     {
-        //ƒAƒjƒ[ƒVƒ‡ƒ“‚Ì‹N“®
+        //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®èµ·å‹•
         m_gageManager.isAnimation = true;
         m_gageManager.animeTime = 0.0f;
 
-        //“Y‚¦š‚É•ÏŠ·‚·‚é
+        //æ·»ãˆå­—ã«å¤‰æ›ã™ã‚‹
         int front = Utility.AbsCaclInt((int)HPGAGE_CHILD_INIT.FRONT, REVERS_ELEMENT);
         int back = Utility.AbsCaclInt((int)HPGAGE_CHILD_INIT.BACK, REVERS_ELEMENT);
 
-        //ƒQ[ƒW‚ğæ“¾‚·‚é
+        //ã‚²ãƒ¼ã‚¸ã‚’å–å¾—ã™ã‚‹
         GageAnimation frontGage = m_gageManager.GetGageAnimation(front);
         GageAnimation backGage = m_gageManager.GetGageAnimation(back);
 
-        //ˆ—‚ğ“o˜^‚·‚é
+        //å‡¦ç†ã‚’ç™»éŒ²ã™ã‚‹
         frontGage.gage.fillAmount = self.statusCs.GetTargetStatus(StarBase.HP) / 
             StatusManager.Instance.dataBase.MaxStatus(StarBase.HP);
 
-        //ƒAƒjƒ[ƒVƒ‡ƒ“ƒNƒ‰ƒX“à‚ÅÀs‚·‚éŠÖ”‚ğ“o˜^‚·‚é
+        //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¯ãƒ©ã‚¹å†…ã§å®Ÿè¡Œã™ã‚‹é–¢æ•°ã‚’ç™»éŒ²ã™ã‚‹
         backGage.imageAction = () =>
         {
             backGage.gage.fillAmount = frontGage.gage.fillAmount + 
@@ -110,11 +110,11 @@ public class HpGageUI : Singleton<HpGageUI>
             backGage.gage.fillAmount = frontGage.gage.fillAmount;
         };
 
-        //ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌI—¹ŠÔ
+        //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®çµ‚äº†æ™‚é–“
         frontGage.finishTime = 0.0f;
         backGage.finishTime = 1.0f;
 
-        //ƒ^ƒCƒ€ƒXƒP[ƒ‹‚Ìİ’è
+        //ã‚¿ã‚¤ãƒ ã‚¹ã‚±ãƒ¼ãƒ«ã®è¨­å®š
         m_gageManager.timeScale = 0.5f;
     }
 }

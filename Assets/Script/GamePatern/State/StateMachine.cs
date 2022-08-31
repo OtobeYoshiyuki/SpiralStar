@@ -1,73 +1,73 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// —LŒÀStateMachine
-/// ƒWƒFƒlƒŠƒbƒNŒ^iƒeƒ“ƒvƒŒ[ƒg‚É‚ÍState‚ÌŠ—LÒ‚ÌŒ^‚ğ“ü‚ê‚éj
+/// æœ‰é™StateMachine
+/// ã‚¸ã‚§ãƒãƒªãƒƒã‚¯å‹ï¼ˆãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã«ã¯Stateã®æ‰€æœ‰è€…ã®å‹ã‚’å…¥ã‚Œã‚‹ï¼‰
 /// </summary>
-/// <typeparam name="T">StateBase‚ğŒp³‚µ‚½Œ^‚ğ“ü‚ê‚é</typeparam>
+/// <typeparam name="T">StateBaseã‚’ç¶™æ‰¿ã—ãŸå‹ã‚’å…¥ã‚Œã‚‹</typeparam>
 public class StateMachine<T> where T : class
 {
-    //State‚ÌŠ—LÒ
+    //Stateã®æ‰€æœ‰è€…
     private T m_owner = null;
 
-    //Œ»İ‚ÌState
+    //ç¾åœ¨ã®State
     private StateBase<T> m_currentState = null;
 
-    //1‚Â‘O‚ÌState
+    //1ã¤å‰ã®State
     private StateBase<T> m_preState = null;
 
     /// <summary>
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     public StateMachine(T owner,StateBase<T> newState)
     {
-        //ƒCƒ“ƒXƒ^ƒ“ƒX‚ÌŠ—LÒ‚ğİ’èiˆø”‚ğÈ—ª‚·‚é‚½‚ßj
+        //ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ‰€æœ‰è€…ã‚’è¨­å®šï¼ˆå¼•æ•°ã‚’çœç•¥ã™ã‚‹ãŸã‚ï¼‰
         m_owner = owner;
 
-        //Œ»İ‚ÌState‚ğİ’è
+        //ç¾åœ¨ã®Stateã‚’è¨­å®š
         m_currentState = newState;
 
-        //Œ»İ‚ÌState‚ÌŠJnˆ—
+        //ç¾åœ¨ã®Stateã®é–‹å§‹å‡¦ç†
         m_currentState?.OnEnter(m_owner, m_preState);
     }
 
     /// <summary>
-    /// —LŒÀStateMachine‚ÌXV
+    /// æœ‰é™StateMachineã®æ›´æ–°
     /// </summary>
     public void UpdateState()
     {
-        //Œ»İ‚ÌState‚ğÀs
+        //ç¾åœ¨ã®Stateã‚’å®Ÿè¡Œ
         m_currentState?.OnExecute(m_owner);
     }
 
     /// <summary>
-    /// State‚ğØ‚è‘Ö‚¦‚é
+    /// Stateã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹
     /// </summary>
-    /// <param name="nextState">V‚µ‚­İ’è‚·‚éState</param>
+    /// <param name="nextState">æ–°ã—ãè¨­å®šã™ã‚‹State</param>
     public void ChangeState(StateBase<T> nextState)
     {
-        //Œ»İ‚ÌState‚ÌI—¹ˆ—iˆø”‚ÉŸ‚ÌState‚ğ“n‚·j
+        //ç¾åœ¨ã®Stateã®çµ‚äº†å‡¦ç†ï¼ˆå¼•æ•°ã«æ¬¡ã®Stateã‚’æ¸¡ã™ï¼‰
         m_currentState?.OnExit(m_owner, nextState);
 
-        //Ÿ‚ÌƒXƒe[ƒg‚ÌŠJnˆ—iˆø”‚É1‚Â‘O‚ÌState‚ğ“n‚·j
+        //æ¬¡ã®ã‚¹ãƒ†ãƒ¼ãƒˆã®é–‹å§‹å‡¦ç†ï¼ˆå¼•æ•°ã«1ã¤å‰ã®Stateã‚’æ¸¡ã™ï¼‰
         nextState?.OnEnter(m_owner, m_currentState);
 
-        //1‚Â‘O‚ÌState‚ğİ’è‚·‚é
+        //1ã¤å‰ã®Stateã‚’è¨­å®šã™ã‚‹
         m_preState = m_currentState;
 
-        //Œ»İ‚ÌState‚ğİ’è‚·‚é
+        //ç¾åœ¨ã®Stateã‚’è¨­å®šã™ã‚‹
         m_currentState = nextState;
     }
 
     /// <summary>
-    /// Œ»İ‚ÌState‚ğæ“¾
+    /// ç¾åœ¨ã®Stateã‚’å–å¾—
     /// </summary>
     public StateBase<T> currentState { get { return m_currentState; } }
 
     /// <summary>
-    /// 1‚Â‘O‚ÌState‚ğæ“¾
+    /// 1ã¤å‰ã®Stateã‚’å–å¾—
     /// </summary>
     public StateBase<T> preState { get { return m_preState; } }
 

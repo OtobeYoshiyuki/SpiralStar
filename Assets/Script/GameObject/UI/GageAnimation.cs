@@ -1,61 +1,61 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
 
 /// <summary>
-/// ƒQ[ƒW‚ÌƒAƒjƒ[ƒVƒ‡ƒ“ƒNƒ‰ƒX
+/// ã‚²ãƒ¼ã‚¸ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¯ãƒ©ã‚¹
 /// </summary>
 public class GageAnimation
 {
     /// <summary>
-    /// ‘ÎÛ‚ÌƒQ[ƒW
+    /// å¯¾è±¡ã®ã‚²ãƒ¼ã‚¸
     /// </summary>
     private Image m_targetGage = null;
 
     /// <summary>
-    /// ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌI—¹ŠÔ
+    /// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®çµ‚äº†æ™‚é–“
     /// </summary>
     private float m_animeFinish = 0.0f;
 
     /// <summary>
-    /// ŠÖ”ƒIƒuƒWƒFƒNƒg
+    /// é–¢æ•°ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
     /// </summary>
     private event Action m_imageAction = null;
 
     /// <summary>
-    /// ŠÖ”ƒIƒuƒWƒFƒNƒg
+    /// é–¢æ•°ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
     /// </summary>
     private event Action m_resetAction = null;
 
     /// <summary>
-    /// ƒQ[ƒW‚ÌXV‚ğs‚¤
+    /// ã‚²ãƒ¼ã‚¸ã®æ›´æ–°ã‚’è¡Œã†
     /// </summary>
-    /// <param name="manager">ƒQ[ƒW‚ÌŠÇ—ƒNƒ‰ƒX</param>
-    /// <returns>§ŒÀŠÔ‚ğ’´‚¦‚½‚çfalse ’´‚¦‚Ä‚¢‚È‚©‚Á‚½‚çtrue</returns>
+    /// <param name="manager">ã‚²ãƒ¼ã‚¸ã®ç®¡ç†ã‚¯ãƒ©ã‚¹</param>
+    /// <returns>åˆ¶é™æ™‚é–“ã‚’è¶…ãˆãŸã‚‰false è¶…ãˆã¦ã„ãªã‹ã£ãŸã‚‰true</returns>
     public bool UpdateGage(GageManager manager)
     {
-        //§ŒÀŠÔ‚ğ’´‚¦‚½‚ç
+        //åˆ¶é™æ™‚é–“ã‚’è¶…ãˆãŸã‚‰
         if (manager.animeTime > m_animeFinish)
         {
-            //ƒŠƒZƒbƒg—p‚ÌŠÖ”ƒIƒuƒWƒFƒNƒg‚ğÀs‚·‚é
+            //ãƒªã‚»ãƒƒãƒˆç”¨ã®é–¢æ•°ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å®Ÿè¡Œã™ã‚‹
             m_resetAction?.Invoke();
 
-            //ˆÈ~‚Ìˆ—‚Í”ò‚Î‚·
+            //ä»¥é™ã®å‡¦ç†ã¯é£›ã°ã™
             return true;
         }
 
-        //İ’è‚³‚ê‚Ä‚¢‚éŠÖ”ƒIƒuƒWƒFƒNƒg‚ğÀs‚·‚é
+        //è¨­å®šã•ã‚Œã¦ã„ã‚‹é–¢æ•°ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å®Ÿè¡Œã™ã‚‹
         m_imageAction?.Invoke();
 
-        //§ŒÀŠÔ‚ğ‰z‚µ‚Ä‚¢‚È‚¢
+        //åˆ¶é™æ™‚é–“ã‚’è¶Šã—ã¦ã„ãªã„
         return false;
     }
 
     /// <summary>
-    /// ƒQ[ƒW‚ÌImage
-    /// ƒQƒbƒ^[@ƒZƒbƒ^[
+    /// ã‚²ãƒ¼ã‚¸ã®Image
+    /// ã‚²ãƒƒã‚¿ãƒ¼ã€€ã‚»ãƒƒã‚¿ãƒ¼
     /// </summary>
     public Image gage
     {
@@ -64,8 +64,8 @@ public class GageAnimation
     }
 
     /// <summary>
-    /// ŠÖ”ƒIƒuƒWƒFƒNƒg
-    /// ƒQƒbƒ^[@ƒZƒbƒ^[
+    /// é–¢æ•°ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+    /// ã‚²ãƒƒã‚¿ãƒ¼ã€€ã‚»ãƒƒã‚¿ãƒ¼
     /// </summary>
     public Action imageAction
     {
@@ -74,8 +74,8 @@ public class GageAnimation
     }
 
     /// <summary>
-    /// ŠÖ”ƒIƒuƒWƒFƒNƒg
-    /// ƒQƒbƒ^[@ƒZƒbƒ^[
+    /// é–¢æ•°ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+    /// ã‚²ãƒƒã‚¿ãƒ¼ã€€ã‚»ãƒƒã‚¿ãƒ¼
     /// </summary>
     public Action resetAction
     {
@@ -84,8 +84,8 @@ public class GageAnimation
     }
 
     /// <summary>
-    /// ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌI—¹ŠÔ
-    /// ƒQƒbƒ^[@ƒZƒbƒ^[
+    /// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®çµ‚äº†æ™‚é–“
+    /// ã‚²ãƒƒã‚¿ãƒ¼ã€€ã‚»ãƒƒã‚¿ãƒ¼
     /// </summary>
     public float finishTime
     {

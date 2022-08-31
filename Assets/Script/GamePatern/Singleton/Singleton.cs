@@ -1,66 +1,66 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : Singleton<T>
 {
     /// <summary>
-    /// Œp³æ‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚Ì•Ï”
+    /// ç¶™æ‰¿å…ˆã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®å¤‰æ•°
     /// </summary>
     private static T s_instance = null;
 
     /// <summary>
-    /// ƒCƒ“ƒXƒ^ƒ“ƒX‚ğæ“¾‚·‚é
+    /// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å–å¾—ã™ã‚‹
     /// </summary>
     public static T Instance { get { return s_instance; } }
 
     /// <summary>
-    /// ƒCƒ“ƒXƒ^ƒ“ƒX‰»’¼Œã‚ÉŒÄ‚Î‚ê‚éˆ—
+    /// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åŒ–ç›´å¾Œã«å‘¼ã°ã‚Œã‚‹å‡¦ç†
     /// </summary>
     private void Awake()
     {
-        //ƒCƒ“ƒXƒ^ƒ“ƒX‚ªNULL‚Ì
+        //ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãŒNULLã®æ™‚
         if(s_instance == null)
         {
-            //ƒVƒ“ƒOƒ‹ƒgƒ“‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ
-            //”h¶ƒNƒ‰ƒX‚ÉCast‚·‚é
+            //ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’
+            //æ´¾ç”Ÿã‚¯ãƒ©ã‚¹ã«Castã™ã‚‹
             s_instance = this as T;
 
-            //ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ‰Šú‰»‚·‚é
+            //ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’åˆæœŸåŒ–ã™ã‚‹
             s_instance.Init();
 
-            //Destory‚ªŒÄ‚Î‚ê‚È‚¢‚æ‚¤‚É‚·‚é
+            //DestoryãŒå‘¼ã°ã‚Œãªã„ã‚ˆã†ã«ã™ã‚‹
             return;
         }
 
-        //ƒCƒ“ƒXƒ^ƒ“ƒX‚ª‚·‚Å‚É¶¬‚³‚ê‚Ä‚¢‚é‚Æ‚«‚ÍA
-        //Comporment‚ğíœ‚·‚é
+        //ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãŒã™ã§ã«ç”Ÿæˆã•ã‚Œã¦ã„ã‚‹ã¨ãã¯ã€
+        //Compormentã‚’å‰Šé™¤ã™ã‚‹
         Destroy(this);
     }
 
     /// <summary>
-    /// MonoBehaviour‚ª”pŠü‚³‚ê‚½‚ÉŒÄ‚Î‚ê‚éˆ—
+    /// MonoBehaviourãŒå»ƒæ£„ã•ã‚ŒãŸæ™‚ã«å‘¼ã°ã‚Œã‚‹å‡¦ç†
     /// </summary>
     private void OnDestroy()
     {
-        //ƒCƒ“ƒXƒ^ƒ“ƒX‚ªƒVƒ“ƒOƒ‹ƒgƒ“‚Ì
+        //ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãŒã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³ã®æ™‚
         if (s_instance == this)
         {
-            //ƒCƒ“ƒXƒ^ƒ“ƒX‚ğNULL‚É‚·‚é
+            //ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’NULLã«ã™ã‚‹
             s_instance = null;
         }
 
-        //”h¶ƒNƒ‰ƒX‚Ì‰ğ•úˆ—‚ğŒÄ‚Ô
+        //æ´¾ç”Ÿã‚¯ãƒ©ã‚¹ã®è§£æ”¾å‡¦ç†ã‚’å‘¼ã¶
         Release();
     }
 
     /// <summary>
-    /// ”h¶ƒNƒ‰ƒX‚Ì‰Šú‰»ˆ—
+    /// æ´¾ç”Ÿã‚¯ãƒ©ã‚¹ã®åˆæœŸåŒ–å‡¦ç†
     /// </summary>
     protected virtual void Init() { }
 
     /// <summary>
-    /// ”h¶ƒNƒ‰ƒX‚Ì”pŠüˆ—
+    /// æ´¾ç”Ÿã‚¯ãƒ©ã‚¹ã®å»ƒæ£„å‡¦ç†
     /// </summary>
     protected virtual void Release() { }
 }

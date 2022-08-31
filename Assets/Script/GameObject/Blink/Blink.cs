@@ -1,139 +1,139 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 
 /// <summary>
-/// “_–Å§ŒäƒNƒ‰ƒX
+/// ç‚¹æ»…åˆ¶å¾¡ã‚¯ãƒ©ã‚¹
 /// </summary>
 [System.Serializable]
 public class Blink
 {
     /// <summary>
-    /// “_–Å’†‚Ìƒtƒ‰ƒO
-    /// Inspecter‚©‚ç•ÒW‚Å‚«‚é‚æ‚¤‚É‚·‚é
+    /// ç‚¹æ»…ä¸­ã®ãƒ•ãƒ©ã‚°
+    /// Inspecterã‹ã‚‰ç·¨é›†ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
     /// </summary>
     [SerializeField]
     private bool m_blink = false;
 
     /// <summary>
-    /// •\¦’†‚Ìƒtƒ‰ƒO
+    /// è¡¨ç¤ºä¸­ã®ãƒ•ãƒ©ã‚°
     /// </summary>
     private bool m_draw = true;
 
     /// <summary>
-    /// “_–Å‚Ìƒ‹[ƒv‚Ìİ’è—p‚Ìƒtƒ‰ƒO
-    /// Inspecter‚©‚ç•ÒW‚Å‚«‚é‚æ‚¤‚É‚·‚é
+    /// ç‚¹æ»…ã®ãƒ«ãƒ¼ãƒ—ã®è¨­å®šç”¨ã®ãƒ•ãƒ©ã‚°
+    /// Inspecterã‹ã‚‰ç·¨é›†ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
     /// </summary>
     [SerializeField]
     private bool m_loop = false;
 
     /// <summary>
-    /// “_–ÅŠÔ‚ÌŒv‘ª—p‚Ì•Ï”
+    /// ç‚¹æ»…æ™‚é–“ã®è¨ˆæ¸¬ç”¨ã®å¤‰æ•°
     /// </summary>
     private float m_blinkTime = 0.0f;
 
     /// <summary>
-    /// “_–Å’†‚ÌƒtƒŒ[ƒ€”(DeltaTimeŠî€)
+    /// ç‚¹æ»…ä¸­ã®ãƒ•ãƒ¬ãƒ¼ãƒ æ•°(DeltaTimeåŸºæº–)
     /// </summary>
     private float m_frameCount = 0.0f;
 
     /// <summary>
-    /// “_–Å‚ÌŠÔŠu—p‚Ì•Ï”
-    /// Inspecter‚©‚ç•ÒW‚Å‚«‚é‚æ‚¤‚É‚·‚é
+    /// ç‚¹æ»…ã®é–“éš”ç”¨ã®å¤‰æ•°
+    /// Inspecterã‹ã‚‰ç·¨é›†ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
     /// </summary>
     [SerializeField]
     private float m_blinkInterval = 0.0f;
 
     /// <summary>
-    /// “_–Å‚ÌÅ‘å”(ƒ‹[ƒvİ’è‚ªfalse‚É‚È‚Á‚Ä‚¢‚é‚Æ‚«‚Ì‚İ—LŒø
-    /// Inspecter‚©‚ç•ÒW‚Å‚«‚é‚æ‚¤‚É‚·‚é)
+    /// ç‚¹æ»…ã®æœ€å¤§æ•°(ãƒ«ãƒ¼ãƒ—è¨­å®šãŒfalseã«ãªã£ã¦ã„ã‚‹ã¨ãã®ã¿æœ‰åŠ¹
+    /// Inspecterã‹ã‚‰ç·¨é›†ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹)
     /// </summary>
     [SerializeField]
     private float m_blinkLimit = 0.0f;
 
     /// <summary>
-    /// •\¦’†‚ÉŒÄ‚Î‚ê‚é
-    /// ŠÖ”ƒfƒŠƒQ[ƒg
+    /// è¡¨ç¤ºä¸­ã«å‘¼ã°ã‚Œã‚‹
+    /// é–¢æ•°ãƒ‡ãƒªã‚²ãƒ¼ãƒˆ
     /// </summary>
     private event Action m_drawEnable = null;
 
     /// <summary>
-    /// ”ñ•\¦’†‚ÉŒÄ‚Î‚ê‚é
-    /// ŠÖ”ƒfƒŠƒQ[ƒg
+    /// éè¡¨ç¤ºä¸­ã«å‘¼ã°ã‚Œã‚‹
+    /// é–¢æ•°ãƒ‡ãƒªã‚²ãƒ¼ãƒˆ
     /// </summary>
     private event Action m_drawDisable = null;
 
     /// <summary>
-    /// ‰Šú‰»‚ÉŒÄ‚Î‚ê‚é
-    /// ŠÖ”ƒfƒŠƒQ[ƒg
+    /// åˆæœŸåŒ–æ™‚ã«å‘¼ã°ã‚Œã‚‹
+    /// é–¢æ•°ãƒ‡ãƒªã‚²ãƒ¼ãƒˆ
     /// </summary>
     private event Action m_resetAction = null;
 
     public void Update()
     {
-        //“_–Å‚ª–³Œø‚Ìê‡
+        //ç‚¹æ»…ãŒç„¡åŠ¹ã®å ´åˆ
         if (!m_blink) return;
 
-        //“_–ÅŠÔ‚ªŒo‰ß‚µ‚½‚Æ‚«
+        //ç‚¹æ»…æ™‚é–“ãŒçµŒéã—ãŸã¨ã
         if (m_blinkTime >= m_blinkInterval)
         {
-            //ƒrƒbƒg‚ğ”½“]‚³‚¹‚é
+            //ãƒ“ãƒƒãƒˆã‚’åè»¢ã•ã›ã‚‹
             m_draw = !m_draw;
 
-            //“_–ÅŠÔ‚ğ‰Šú‰»‚·‚é
+            //ç‚¹æ»…æ™‚é–“ã‚’åˆæœŸåŒ–ã™ã‚‹
             m_blinkTime = 0.0f;
         }
 
-        //ƒ‹[ƒvİ’è‚ªfalse‚Ì
+        //ãƒ«ãƒ¼ãƒ—è¨­å®šãŒfalseã®æ™‚
         if(!m_loop)
         {
-            //“_–ÅŠÔ‚ÌI—¹‚Ì
+            //ç‚¹æ»…æ™‚é–“ã®çµ‚äº†ã®æ™‚
             if(m_frameCount >= m_blinkLimit)
             {
-                //“_–Å‚ğ‰Šú‰»‚·‚é
+                //ç‚¹æ»…ã‚’åˆæœŸåŒ–ã™ã‚‹
                 OnReset();
 
-                //ˆÈ~‚Ìˆ—‚Í”ò‚Î‚·
+                //ä»¥é™ã®å‡¦ç†ã¯é£›ã°ã™
                 return;
             }
         }
 
-        //ó‹µ‚É‰‚¶‚ÄŠÖ”‚ğŒÄ‚Ô
+        //çŠ¶æ³ã«å¿œã˜ã¦é–¢æ•°ã‚’å‘¼ã¶
         Action draw = m_draw ? m_drawEnable : m_drawDisable;
         draw?.Invoke();
 
-        //“_–ÅŠÔ‚ğXV‚·‚é
+        //ç‚¹æ»…æ™‚é–“ã‚’æ›´æ–°ã™ã‚‹
         m_blinkTime += Time.deltaTime;
 
-        //ƒtƒŒ[ƒ€”‚ğXV‚·‚é
+        //ãƒ•ãƒ¬ãƒ¼ãƒ æ•°ã‚’æ›´æ–°ã™ã‚‹
         m_frameCount += Time.deltaTime;
     }
 
     /// <summary>
-    /// “_–Å‚ğ‰Šú‰»‚·‚é
+    /// ç‚¹æ»…ã‚’åˆæœŸåŒ–ã™ã‚‹
     /// </summary>
     public void OnReset()
     {
-        //“_–Å‚ğ–³Œø‚É‚·‚é
+        //ç‚¹æ»…ã‚’ç„¡åŠ¹ã«ã™ã‚‹
         m_blink = false;
 
-        //•\¦‚ğƒIƒ“‚É‚·‚é
+        //è¡¨ç¤ºã‚’ã‚ªãƒ³ã«ã™ã‚‹
         m_draw = true;
 
-        //“_–ÅŠÔ‚ğ‰Šú‰»‚·‚é
+        //ç‚¹æ»…æ™‚é–“ã‚’åˆæœŸåŒ–ã™ã‚‹
         m_blinkTime = 0.0f;
 
-        //ƒtƒŒ[ƒ€”‚ğ‰Šú‰»‚·‚é
+        //ãƒ•ãƒ¬ãƒ¼ãƒ æ•°ã‚’åˆæœŸåŒ–ã™ã‚‹
         m_frameCount = 0.0f;
 
-        //ƒCƒxƒ“ƒgŠÖ”‚ğŒÄ‚Ô
+        //ã‚¤ãƒ™ãƒ³ãƒˆé–¢æ•°ã‚’å‘¼ã¶
         m_resetAction?.Invoke();
     }
 
     /// <summary>
-    /// “_–Å’†‚Ìƒtƒ‰ƒO
-    /// ƒQƒbƒ^[
+    /// ç‚¹æ»…ä¸­ã®ãƒ•ãƒ©ã‚°
+    /// ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     public bool blink 
     { 
@@ -142,26 +142,26 @@ public class Blink
     }
 
     /// <summary>
-    /// •\¦’†‚Ìƒtƒ‰ƒO
-    /// ƒQƒbƒ^[
+    /// è¡¨ç¤ºä¸­ã®ãƒ•ãƒ©ã‚°
+    /// ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     public bool draw { get { return m_draw; } }
 
     /// <summary>
-    /// ƒCƒxƒ“ƒgŠÖ”
-    /// ƒZƒbƒ^[
+    /// ã‚¤ãƒ™ãƒ³ãƒˆé–¢æ•°
+    /// ã‚»ãƒƒã‚¿ãƒ¼
     /// </summary>
     public Action drawEnable { set { m_drawEnable = value; } }
 
     /// <summary>
-    /// ƒCƒxƒ“ƒgŠÖ”
-    /// ƒZƒbƒ^[
+    /// ã‚¤ãƒ™ãƒ³ãƒˆé–¢æ•°
+    /// ã‚»ãƒƒã‚¿ãƒ¼
     /// </summary>
     public Action drawDisable { set { m_drawDisable = value; } }
 
     /// <summary>
-    /// ƒCƒxƒ“ƒgŠÖ”
-    /// ƒZƒbƒ^[
+    /// ã‚¤ãƒ™ãƒ³ãƒˆé–¢æ•°
+    /// ã‚»ãƒƒã‚¿ãƒ¼
     /// </summary>
     public Action resetAction { set { m_resetAction = value; } }
 }

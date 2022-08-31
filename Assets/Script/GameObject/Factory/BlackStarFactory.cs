@@ -1,41 +1,41 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// BlackStar‚ğ¶¬‚·‚éHê
+/// BlackStarã‚’ç”Ÿæˆã™ã‚‹å·¥å ´
 /// </summary>
 public class BlackStarFactory : Singleton<BlackStarFactory>
 {
     /// <summary>
-    /// “G‚ÌBase‚Æ‚È‚éƒvƒŒƒnƒu
-    /// Inspecter‚©‚ç•ÒW‚Å‚«‚é‚æ‚¤‚É‚·‚é
+    /// æ•µã®Baseã¨ãªã‚‹ãƒ—ãƒ¬ãƒãƒ–
+    /// Inspecterã‹ã‚‰ç·¨é›†ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
     /// </summary>
     [SerializeField]
     private GameObject m_starPrefab = null;
 
     /// <summary>
-    /// ¶¬‚·‚éÀ•W‚ğw’è‚·‚é
-    /// Inspecter‚©‚ç•ÒW‚Å‚«‚é‚æ‚¤‚É‚·‚é
+    /// ç”Ÿæˆã™ã‚‹åº§æ¨™ã‚’æŒ‡å®šã™ã‚‹
+    /// Inspecterã‹ã‚‰ç·¨é›†ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
     /// </summary>
     [SerializeField]
     private List<Vector3> m_spawnLocations = null;
 
     /// <summary>
-    /// ‰æ‘œ‚ÌF‚ğw’è‚·‚é
-    /// Inspecter‚©‚ç•ÒW‚Å‚«‚é‚æ‚¤‚É‚·‚é
+    /// ç”»åƒã®è‰²ã‚’æŒ‡å®šã™ã‚‹
+    /// Inspecterã‹ã‚‰ç·¨é›†ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
     /// </summary>
     [SerializeField]
     private List<Color> m_spriteColors = null;
 
     /// <summary>
-    /// “G‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
+    /// æ•µã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
     /// </summary>
     private List<GameObject> m_enemyStars = null;
 
     /// <summary>
-    /// “G‚Ì”
-    /// ’è”
+    /// æ•µã®æ•°
+    /// å®šæ•°
     /// </summary>
     public const int MAX_NUM = 1; 
 
@@ -52,16 +52,16 @@ public class BlackStarFactory : Singleton<BlackStarFactory>
     }
 
     /// <summary>
-    /// ƒCƒ“ƒXƒ^ƒ“ƒX‚Ì‰Šú‰»ˆ—
+    /// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®åˆæœŸåŒ–å‡¦ç†
     /// </summary>
     protected override void Init()
     {
-        //GameObject‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ•Û—¯ç‚½‚ß‚ÌList‚ğ¶¬
+        //GameObjectã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ä¿æŒç•™å®ˆãŸã‚ã®Listã‚’ç”Ÿæˆ
         m_enemyStars = new List<GameObject>();
     }
 
     /// <summary>
-    /// GameObject‚Ì‰ğ•úˆ—
+    /// GameObjectã®è§£æ”¾å‡¦ç†
     /// </summary>
     protected override void Release()
     {
@@ -69,50 +69,50 @@ public class BlackStarFactory : Singleton<BlackStarFactory>
     }
 
     /// <summary>
-    /// “GGameObject‚ğ¶¬
+    /// æ•µGameObjectã‚’ç”Ÿæˆ
     /// </summary>
-    /// <param name="star">Player‚ÌStar</param>
-    /// <param name="num">¶¬‚·‚é”</param>
+    /// <param name="star">Playerã®Star</param>
+    /// <param name="num">ç”Ÿæˆã™ã‚‹æ•°</param>
     public void CreateBlackStar(SpiralStar star,in int kinds)
     {
-        //“GGameObject‚ğ¶¬
+        //æ•µGameObjectã‚’ç”Ÿæˆ
         GameObject enemyStar = Instantiate(m_starPrefab, m_spawnLocations[kinds], Quaternion.identity);
 
-        //Šî’êƒNƒ‰ƒX‚ÉPlayerƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ“o˜^
+        //åŸºåº•ã‚¯ãƒ©ã‚¹ã«Playerã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç™»éŒ²
         enemyStar.GetComponent<BalanStar>().starPlayer = star;
 
-        //¯•Ê‚·‚éID‚ğ“o˜^‚·‚é
+        //è­˜åˆ¥ã™ã‚‹IDã‚’ç™»éŒ²ã™ã‚‹
         enemyStar.GetComponent<BalanStar>().id = kinds;
 
-        //‰æ‘œ‚ÌF‚ğİ’è‚·‚é
+        //ç”»åƒã®è‰²ã‚’è¨­å®šã™ã‚‹
         enemyStar.GetComponent<SpriteRenderer>().color = m_spriteColors[kinds];
 
-        //“G‚ğList‚É’Ç‰Á
+        //æ•µã‚’Listã«è¿½åŠ 
         m_enemyStars.Add(enemyStar);
 
     }
 
     /// <summary>
-    /// “GGameObject‚ğ‰ğ•ú
+    /// æ•µGameObjectã‚’è§£æ”¾
     /// </summary>
-    /// <param name="id">¯•Ê”Ô†</param>
+    /// <param name="id">è­˜åˆ¥ç•ªå·</param>
     public void ReleaseBlackStar(in int id)
     {
         for (int i = 0;i < m_enemyStars.Count;i++)
         {
-            //”h¶ƒNƒ‰ƒX‚ÌƒXƒNƒŠƒvƒg‚ğæ“¾‚·‚é
+            //æ´¾ç”Ÿã‚¯ãƒ©ã‚¹ã®ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’å–å¾—ã™ã‚‹
             BalanStar balanStar = m_enemyStars[i].GetComponent<BalanStar>();
 
-            //“¯‚¶ID‚ÌGameObject‚ªŒ©‚Â‚©‚Á‚½‚ç
+            //åŒã˜IDã®GameObjectãŒè¦‹ã¤ã‹ã£ãŸã‚‰
             if(balanStar.id == id)
             {
-                //ƒIƒuƒWƒFƒNƒg‚ğÁ‹‚·‚é
+                //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ¶ˆå»ã™ã‚‹
                 Destroy(m_enemyStars[i]);
 
-                //”z—ñ‚Ì—v‘f‚ğÁ‚·
+                //é…åˆ—ã®è¦ç´ ã‚’æ¶ˆã™
                 m_enemyStars.RemoveAt(i);
 
-                //ˆê“xÁ‚µ‚½‚çA‚Ù‚©‚Ìˆ—‚Í”ò‚Î‚·
+                //ä¸€åº¦æ¶ˆã—ãŸã‚‰ã€ã»ã‹ã®å‡¦ç†ã¯é£›ã°ã™
                 return;
             }
         }

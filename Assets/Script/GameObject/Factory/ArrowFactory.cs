@@ -1,14 +1,14 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Arrow‚ğ¶¬‚·‚éHê
+/// Arrowã‚’ç”Ÿæˆã™ã‚‹å·¥å ´
 /// </summary>
 public class ArrowFactory : Singleton<ArrowFactory>
 {
     /// <summary>
-    /// –îˆó‚ÌPrefab‚ÌGameObject
+    /// çŸ¢å°ã®Prefabã®GameObject
     /// </summary>
     [SerializeField]
     private GameObject m_arrowPrefab = null;
@@ -26,14 +26,14 @@ public class ArrowFactory : Singleton<ArrowFactory>
     }
 
     /// <summary>
-    /// ƒCƒ“ƒXƒ^ƒ“ƒX‚Ì‰Šú‰»ˆ—
+    /// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®åˆæœŸåŒ–å‡¦ç†
     /// </summary>
     protected override void Init()
     {
     }
 
     /// <summary>
-    /// GameObject‚Ì‰ğ•úˆ—
+    /// GameObjectã®è§£æ”¾å‡¦ç†
     /// </summary>
     protected override void Release()
     {
@@ -41,29 +41,29 @@ public class ArrowFactory : Singleton<ArrowFactory>
     }
 
     /// <summary>
-    /// Arrow‚ÌGameObject‚ğ¶¬‚·‚é
+    /// Arrowã®GameObjectã‚’ç”Ÿæˆã™ã‚‹
     /// </summary>
-    /// <param name="star">Arrow‚ÌeƒIƒuƒWƒFƒNƒg</param>
-    /// <param name="relative">Arrow‚Éeq•t‚¯‚µ‚½Û‚Ì‘Š‘ÎÀ•W</param>
+    /// <param name="star">Arrowã®è¦ªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
+    /// <param name="relative">Arrowã«è¦ªå­ä»˜ã‘ã—ãŸéš›ã®ç›¸å¯¾åº§æ¨™</param>
     public void CreateArrow(SpiralStar star,in Vector3 relative) 
     {
-        //–îˆó‚ÌGameObject‚Ìƒ[ƒ‹ƒhÀ•W‚ğİ’è‚·‚é
+        //çŸ¢å°ã®GameObjectã®ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã‚’è¨­å®šã™ã‚‹
         Vector3 worldPos = new Vector3(star.rigidBody2D.position.x,star.rigidBody2D.position.y,0.0f) + relative;
 
-        //ƒvƒŒƒnƒu‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬
+        //ãƒ—ãƒ¬ãƒãƒ–ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ
         star.arrow = Instantiate(m_arrowPrefab, worldPos, Quaternion.identity);
     }
 
     /// <summary>
-    /// –îˆó‚ÌGameObject‚ğíœ‚·‚é
+    /// çŸ¢å°ã®GameObjectã‚’å‰Šé™¤ã™ã‚‹
     /// </summary>
-    /// <param name="star">–îˆó‚ÌeƒIƒuƒWƒFƒNƒg</param>
+    /// <param name="star">çŸ¢å°ã®è¦ªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
     public void ReleaseArrow(SpiralStar star)
     {
-        //–îˆó‚ÌGameObject‚ğíœ‚·‚é
+        //çŸ¢å°ã®GameObjectã‚’å‰Šé™¤ã™ã‚‹
         Destroy(star.arrow);
 
-        //–îˆó‚ğ‰Šú‰»‚·‚é
+        //çŸ¢å°ã‚’åˆæœŸåŒ–ã™ã‚‹
         star.arrow = null;
     }
 }

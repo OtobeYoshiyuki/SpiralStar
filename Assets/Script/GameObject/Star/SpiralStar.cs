@@ -1,71 +1,71 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
-/// ƒvƒŒƒCƒ„[‚ª‘€ì‚·‚éƒXƒpƒCƒ‰ƒ‹ƒXƒ^[
+/// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒæ“ä½œã™ã‚‹ã‚¹ãƒ‘ã‚¤ãƒ©ãƒ«ã‚¹ã‚¿ãƒ¼
 /// </summary>
 public class SpiralStar : StarBase
 {
     /// <summary>
-    /// ƒL[“ü—Í‚ğŠÇ—‚·‚éƒNƒ‰ƒX
+    /// ã‚­ãƒ¼å…¥åŠ›ã‚’ç®¡ç†ã™ã‚‹ã‚¯ãƒ©ã‚¹
     /// </summary>
     private MyAction m_myAction = null;
 
     /// <summary>
-    /// –îˆó‚ÌGameObject
-    /// SpiralStar‚Ìis•ûŒü‚ğw‚·
+    /// çŸ¢å°ã®GameObject
+    /// SpiralStarã®é€²è¡Œæ–¹å‘ã‚’æŒ‡ã™
     /// </summary>
     private GameObject m_childArrow = null;
 
     /// <summary>
-    /// —LŒÀStateMachine
+    /// æœ‰é™StateMachine
     /// </summary>
     private StateMachine<SpiralStar> m_stateMachine = null;
 
     /// <summary>
-    /// SpiralRotation‚ÌState
+    /// SpiralRotationã®State
     /// </summary>
     private SpiralRotation m_spiralRotation = null;
 
     /// <summary>
-    /// SpiralMove‚ÌState
+    /// SpiralMoveã®State
     /// </summary>
     private SpiralMove m_spiralMove = null;
 
     /// <summary>
-    /// SpiralCollision‚ÌState
+    /// SpiralCollisionã®State
     /// </summary>
     private SpiralCollision m_spiralCollision = null;
 
     /// <summary>
-    /// ˆÚ“®—Ê‚ğƒXƒJƒ‰”{‚·‚éƒAƒjƒ[ƒVƒ‡ƒ“ƒJ[ƒu
-    /// Inspecter‚©‚ç•ÒW‚Å‚«‚é‚æ‚¤‚É‚·‚é
+    /// ç§»å‹•é‡ã‚’ã‚¹ã‚«ãƒ©å€ã™ã‚‹ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚«ãƒ¼ãƒ–
+    /// Inspecterã‹ã‚‰ç·¨é›†ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
     /// </summary>
     [SerializeField]
     private AnimationCurve m_chargeCurve = null;
 
     /// <summary>
-    /// GameObject‚Éİ’è‚³‚ê‚Ä‚¢‚éƒ^ƒO
-    /// ’è”
+    /// GameObjectã«è¨­å®šã•ã‚Œã¦ã„ã‚‹ã‚¿ã‚°
+    /// å®šæ•°
     /// </summary>
     public const string SPIRALSTAR_TAG = "Player";
 
     /// <summary>
-    /// FiverƒXƒe[ƒ^ƒX‚Ìkey
-    /// ’è”
+    /// Fiverã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®key
+    /// å®šæ•°
     /// </summary>
     public const string FIVER = "Fiver";
 
     /// <summary>
-    /// BoostƒXƒe[ƒ^ƒX‚Ìkey
-    /// ’è”
+    /// Boostã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®key
+    /// å®šæ•°
     /// </summary>
     public const string BOOST = "Boost";
 
     /// <summary>
-    /// ƒ_ƒ[ƒW‚ÌÅ¬ŒÀ‚Ì—Í
+    /// ãƒ€ãƒ¡ãƒ¼ã‚¸ã®æœ€å°é™ã®åŠ›
     /// </summary>
     public const float DAMAGE_MIN_POWER = 30.0f;
 
@@ -73,48 +73,48 @@ public class SpiralStar : StarBase
     private Blink m_blink = new Blink();
 
     /// <summary>
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     public SpiralStar():base()
     {
-        //SpiralRotation‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬
+        //SpiralRotationã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ
         m_spiralRotation = new SpiralRotation();
 
-        //SpiralMove‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬
+        //SpiralMoveã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ
         m_spiralMove = new SpiralMove();
 
-        //SpiralCollision‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬
+        //SpiralCollisionã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ
         m_spiralCollision = new SpiralCollision();
     }
 
     /// <summary>
-    /// ƒCƒ“ƒXƒ^ƒ“ƒX‚Ì¶¬’¼Œã‚ÉŒÄ‚Î‚ê‚éˆ—
+    /// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®ç”Ÿæˆç›´å¾Œã«å‘¼ã°ã‚Œã‚‹å‡¦ç†
     /// </summary>
     private void Awake()
     {
-        //ƒL[“ü—Í‚ÌŠÇ—ƒNƒ‰ƒX‚ğ¶¬
+        //ã‚­ãƒ¼å…¥åŠ›ã®ç®¡ç†ã‚¯ãƒ©ã‚¹ã‚’ç”Ÿæˆ
         m_myAction = new MyAction();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        //SpriteRenderer‚ğæ“¾‚·‚é
+        //SpriteRendererã‚’å–å¾—ã™ã‚‹
         SpriteRenderer sprite = GetComponent<SpriteRenderer>();
 
-        //¯‚Ì‰Šú‰»ˆ—
+        //æ˜Ÿã®åˆæœŸåŒ–å‡¦ç†
         StarInit();
 
-        //—LŒÀStateMachine‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬
+        //æœ‰é™StateMachineã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ
         m_stateMachine = new StateMachine<SpiralStar>(this, m_spiralRotation);
 
         for (int i = 0; i < BlackStarFactory.MAX_NUM; i++)
         {
-            //“G‚ÌStar‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬
+            //æ•µã®Starã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ
             BlackStarFactory.Instance.CreateBlackStar(this, i);
         }
 
-        //ƒCƒxƒ“ƒgŠÖ”‚ğ“o˜^‚·‚é
+        //ã‚¤ãƒ™ãƒ³ãƒˆé–¢æ•°ã‚’ç™»éŒ²ã™ã‚‹
         m_blink.drawEnable = () => sprite.color = Color.yellow;
         m_blink.drawDisable = () => sprite.color = Utility.SetColorAddtive(Color.yellow, Color.red,
             (SpriteRenderer renderer, float alfa) => Utility.SetColorOpacity(renderer, alfa), sprite, 0.5f) ;
@@ -124,167 +124,167 @@ public class SpiralStar : StarBase
     // Update is called once per frame
     void Update()
     {
-        //“_–Å‚ÌXVˆ—
+        //ç‚¹æ»…ã®æ›´æ–°å‡¦ç†
         m_blink.Update();
 
-        //¯‚ÌXVˆ—
+        //æ˜Ÿã®æ›´æ–°å‡¦ç†
         StarUpdate();
 
         GameData.AddFloat(gameObject.tag + "X", m_rigidBody2D.position.x);
         GameData.AddFloat(gameObject.tag + "Y", m_rigidBody2D.position.y);
 
-        //GamePad‚ÌAƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚ç
+        //GamePadã®Aãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸã‚‰
         if (m_myAction.Player.Atack.WasPressedThisFrame())
         {
-            //SpiralRotation‚Ö‚ÆˆÚs‚·‚é
+            //SpiralRotationã¸ã¨ç§»è¡Œã™ã‚‹
             m_stateMachine.ChangeState(m_spiralRotation);
         }
 
-        //ƒ_ƒ[ƒW‚ğó‚¯‚½‚Æ‚«
+        //ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ãŸã¨ã
         if (damage)
         {
-            //HPƒQ[ƒW‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
+            //HPã‚²ãƒ¼ã‚¸ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
             HpGageUI.Instance.OnGageDamageAnimation(this);
 
-            //ƒ`ƒƒ[ƒW‚ğƒŠƒZƒbƒg‚·‚é
+            //ãƒãƒ£ãƒ¼ã‚¸ã‚’ãƒªã‚»ãƒƒãƒˆã™ã‚‹
             StarChaegeUI.Instance.OnReset();
 
-            //“_–Å‚ğ‰Šú‰»‚·‚é
+            //ç‚¹æ»…ã‚’åˆæœŸåŒ–ã™ã‚‹
             m_blink.OnReset();
 
-            //“_–Å‚ğŠJn‚·‚é
+            //ç‚¹æ»…ã‚’é–‹å§‹ã™ã‚‹
             m_blink.blink = true;
 
-            //ƒtƒ‰ƒO‚ğ—‚Æ‚·
+            //ãƒ•ãƒ©ã‚°ã‚’è½ã¨ã™
             damage = false;
         }
 
-        //•\¦‚·‚é•¶š‚ğ‰ÁH‚·‚é
+        //è¡¨ç¤ºã™ã‚‹æ–‡å­—ã‚’åŠ å·¥ã™ã‚‹
         StarChaegeUI.Instance.ManufacturingText(this);
 
-        //StateMachine‚ÌXVˆ—
+        //StateMachineã®æ›´æ–°å‡¦ç†
         m_stateMachine.UpdateState();
     }
 
     /// <summary>
-    /// Object‚ª—LŒø‚É‚È‚Á‚½‚Æ‚«‚ÉŒÄ‚Î‚ê‚éˆ—
+    /// ObjectãŒæœ‰åŠ¹ã«ãªã£ãŸã¨ãã«å‘¼ã°ã‚Œã‚‹å‡¦ç†
     /// </summary>
     private void OnEnable()
     {
-        //ƒL[“ü—Í‚ğ—LŒø‚É‚·‚é
+        //ã‚­ãƒ¼å…¥åŠ›ã‚’æœ‰åŠ¹ã«ã™ã‚‹
         m_myAction.Enable();
     }
 
     /// <summary>
-    /// Object‚ªŒü‚±‚¤‚É‚È‚Á‚½‚Æ‚«‚ÉŒÄ‚Î‚ê‚éˆ—
+    /// ObjectãŒå‘ã“ã†ã«ãªã£ãŸã¨ãã«å‘¼ã°ã‚Œã‚‹å‡¦ç†
     /// </summary>
     private void OnDisable()
     {
-        //ƒL[“ü—Í‚ğ–³Œø‚É‚·‚é
+        //ã‚­ãƒ¼å…¥åŠ›ã‚’ç„¡åŠ¹ã«ã™ã‚‹
         m_myAction.Disable();
     }
 
     /// <summary>
-    /// StateMachine‚ğæ“¾
-    /// ƒQƒbƒ^[
+    /// StateMachineã‚’å–å¾—
+    /// ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     public StateMachine<SpiralStar> stateMachine { get { return m_stateMachine; } }
 
     /// <summary>
-    /// SpiralRotation‚ÌState‚ğæ“¾
-    /// ƒQƒbƒ^[
+    /// SpiralRotationã®Stateã‚’å–å¾—
+    /// ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     public SpiralRotation spiralRotation { get { return m_spiralRotation; } }
 
     /// <summary>
-    /// SpiralMove‚ÌState‚ğæ“¾
-    /// ƒQƒbƒ^[
+    /// SpiralMoveã®Stateã‚’å–å¾—
+    /// ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     public SpiralMove spiralMove { get { return m_spiralMove; } }
 
     /// <summary>
-    /// SpiralCollision‚ÌState‚ğæ“¾
-    /// ƒQƒbƒ^[
+    /// SpiralCollisionã®Stateã‚’å–å¾—
+    /// ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     public SpiralCollision spiralCollision { get { return m_spiralCollision; } }
 
     /// <summary>
-    /// –îˆó‚ÌGameObject
-    /// ƒQƒbƒ^[AƒZƒbƒ^[
+    /// çŸ¢å°ã®GameObject
+    /// ã‚²ãƒƒã‚¿ãƒ¼ã€ã‚»ãƒƒã‚¿ãƒ¼
     /// </summary>
     public GameObject arrow { get { return m_childArrow; } set { m_childArrow = value; } }
 
     /// <summary>
-    /// ƒL[“ü—Í‚ğæ“¾
-    /// ƒQƒbƒ^[
+    /// ã‚­ãƒ¼å…¥åŠ›ã‚’å–å¾—
+    /// ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     public MyAction actions { get { return m_myAction; } }
 
     /// <summary>
-    /// ƒ`ƒƒ[ƒW‚ÌAnimationCurve‚ğæ“¾
-    /// ƒQƒbƒ^[
+    /// ãƒãƒ£ãƒ¼ã‚¸ã®AnimationCurveã‚’å–å¾—
+    /// ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     public AnimationCurve curve { get { return m_chargeCurve; } }
 
     /// <summary>
-    /// “_–Å‚Ìó‘Ô‚ğæ“¾
-    /// ƒQƒbƒ^[
+    /// ç‚¹æ»…ã®çŠ¶æ…‹ã‚’å–å¾—
+    /// ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     public Blink blink { get { return m_blink; } }
 
     /// <summary>
-    /// “–‚½‚Á‚½uŠÔ‚ğŒŸ’m‚·‚é
+    /// å½“ãŸã£ãŸç¬é–“ã‚’æ¤œçŸ¥ã™ã‚‹
     /// </summary>
-    /// <param name="collision">“–‚½‚Á‚½ƒIƒuƒWƒFƒNƒg‚Ìî•ñ</param>
+    /// <param name="collision">å½“ãŸã£ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æƒ…å ±</param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //BlackStar‚ÉÕ“Ë‚µ‚½ê‡
+        //BlackStarã«è¡çªã—ãŸå ´åˆ
         if(collision.gameObject.tag == BlackStar.BLACKSTAR_TAG)
         {
-            //StarChargeUI‚ğæ“¾‚·‚é
+            //StarChargeUIã‚’å–å¾—ã™ã‚‹
             StarChaegeUI starChaegeUI = StarChaegeUI.Instance;
 
-            //StatusManager‚ğæ“¾‚·‚é
+            //StatusManagerã‚’å–å¾—ã™ã‚‹
             StatusManager statusManager = StatusManager.Instance;
 
-           //ƒAƒ^ƒbƒ`‚³‚ê‚Ä‚¢‚éƒXƒNƒŠƒvƒg‚ğæ“¾‚·‚é
+           //ã‚¢ã‚¿ãƒƒãƒã•ã‚Œã¦ã„ã‚‹ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’å–å¾—ã™ã‚‹
             BlackStar blackStar = collision.gameObject.GetComponent<BalanStar>();
 
-            //©g‚ªUŒ‚’†‚Ì(ƒ`ƒƒ[ƒW’†‚Ì‚Í‹N“®‚µ‚È‚¢)
+            //è‡ªèº«ãŒæ”»æ’ƒä¸­ã®æ™‚(ãƒãƒ£ãƒ¼ã‚¸ä¸­ã®æ™‚ã¯èµ·å‹•ã—ãªã„)
             if (m_stateMachine.currentState == m_spiralMove)
             {
-                //©g‚Ìƒpƒ[‚ª‹K’è’lˆÈã‚Ìê‡
+                //è‡ªèº«ã®ãƒ‘ãƒ¯ãƒ¼ãŒè¦å®šå€¤ä»¥ä¸Šã®å ´åˆ
                 if (starChaegeUI.power >= DAMAGE_MIN_POWER)
                 {
-                    //“G‚ğ“|‚·
+                    //æ•µã‚’å€’ã™
                     blackStar.deth = true;
                 }
-                //ƒpƒ[‚ª‘«‚è‚È‚¢‚Æ‚«
+                //ãƒ‘ãƒ¯ãƒ¼ãŒè¶³ã‚Šãªã„ã¨ã
                 else
                 {
-                    //ƒ_ƒ[ƒW‚ğó‚¯‚Ä‚¢‚È‚¢‚Æ‚«
+                    //ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ã¦ã„ãªã„ã¨ã
                     if (!m_blink.blink)
                     {
-                        //©•ª‚ªƒ_ƒ[ƒW‚ğó‚¯‚é
+                        //è‡ªåˆ†ãŒãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ã‚‹
                         damage = true;
 
-                        //ƒ_ƒ[ƒWŒvZ‚ğs‚¤
+                        //ãƒ€ãƒ¡ãƒ¼ã‚¸è¨ˆç®—ã‚’è¡Œã†
                        statusManager.OnDamageStatus(statusCs, blackStar.statusCs);
                     }
                 }
             }
             else
             {
-                //©g‚ªƒ`ƒƒ[ƒW’†‚Ì
+                //è‡ªèº«ãŒãƒãƒ£ãƒ¼ã‚¸ä¸­ã®æ™‚
                 if (m_stateMachine.currentState == m_spiralRotation)
                 {
-                    //ƒ_ƒ[ƒW‚ğó‚¯‚Ä‚¢‚È‚¢‚Æ‚«
+                    //ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ã¦ã„ãªã„ã¨ã
                     if (!m_blink.blink)
                     {
-                        //–³ğŒ‚Åƒ_ƒ[ƒW‚ğó‚¯‚é
+                        //ç„¡æ¡ä»¶ã§ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ã‚‹
                         damage = true;
 
-                        //ƒ_ƒ[ƒWŒvZ‚ğs‚¤
+                        //ãƒ€ãƒ¡ãƒ¼ã‚¸è¨ˆç®—ã‚’è¡Œã†
                         statusManager.OnDamageStatus(statusCs, blackStar.statusCs);
                     }
                 }

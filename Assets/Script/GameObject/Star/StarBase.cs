@@ -1,115 +1,115 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ¯‚ÌƒCƒ“ƒ^[ƒtƒF[ƒX
+/// æ˜Ÿã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
 /// </summary>
 public interface IStarBase
 {
-    //‰Šú‰»
+    //åˆæœŸåŒ–
     public void StarInit();
 
-    //XVˆ—
+    //æ›´æ–°å‡¦ç†
     public void StarUpdate();
 
-    //I—¹ˆ—
+    //çµ‚äº†å‡¦ç†
     public void StarFinal();
 }
 
 
 /// <summary>
-/// ¯‚ÌŠî’êƒNƒ‰ƒX
+/// æ˜Ÿã®åŸºåº•ã‚¯ãƒ©ã‚¹
 /// </summary>
 public abstract class StarBase : Movement, IStarBase
 {
     /// <summary>
-    /// HPƒXƒe[ƒ^ƒX‚Ìkey
-    /// ’è”
+    /// HPã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®key
+    /// å®šæ•°
     /// </summary>
     public const string HP = "Hp";
 
     /// <summary>
-    /// AtackƒXƒe[ƒ^ƒX‚Ìkey
-    /// ’è”
+    /// Atackã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®key
+    /// å®šæ•°
     /// </summary>
     public const string ATACK = "Atack";
 
     /// <summary>
-    /// DefenceƒXƒe[ƒ^ƒX‚Ìkey
-    /// ’è”
+    /// Defenceã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®key
+    /// å®šæ•°
     /// </summary>
     public const string DEFENCE = "Defence";
 
     /// <summary>
-    /// State‚ÌŠÔ‚ğŒv‘ª‚·‚éŠÔ
+    /// Stateã®æ™‚é–“ã‚’è¨ˆæ¸¬ã™ã‚‹æ™‚é–“
     /// </summary>
     private float m_time = 0.0f;
 
     /// <summary>
-    /// Star‚ÌÕ“Ë‚ğƒ`ƒFƒbƒN‚·‚éƒtƒ‰ƒO
+    /// Starã®è¡çªã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹ãƒ•ãƒ©ã‚°
     /// </summary>
     private bool m_damageCheck = false;
 
     /// <summary>
-    /// ƒLƒƒƒ‰‚ª‚â‚ç‚ê‚½‚©‚ğƒ`ƒFƒbƒN‚·‚éƒtƒ‰ƒO
+    /// ã‚­ãƒ£ãƒ©ãŒã‚„ã‚‰ã‚ŒãŸã‹ã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹ãƒ•ãƒ©ã‚°
     /// </summary>
     private bool m_dethCheck = false;
 
     /// <summary>
-    /// ƒXƒe[ƒ^ƒX‚ÌƒRƒ“ƒgƒ[ƒ‰[
+    /// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼
     /// </summary>
     private StatusController m_statusCs = new StatusController();
 
     /// <summary>
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     protected StarBase() : base()
     {
 
     }
 
-    //‰Šú‰»
+    //åˆæœŸåŒ–
     public virtual void StarInit()
     {
-        //RigidBody2D‚ğæ“¾‚·‚é
+        //RigidBody2Dã‚’å–å¾—ã™ã‚‹
         m_rigidBody2D = gameObject.GetComponent<Rigidbody2D>();
 
-        //CircleCollider2D‚ğæ“¾‚·‚é
+        //CircleCollider2Dã‚’å–å¾—ã™ã‚‹
         m_circleCollider2D = gameObject.GetComponent<CircleCollider2D>();
 
-        //StatusManager‚ğæ“¾‚·‚é
+        //StatusManagerã‚’å–å¾—ã™ã‚‹
         StatusManager statusManager = StatusManager.Instance;
 
-        //©g‚ÌƒXƒe[ƒ^ƒX‚Ìî•ñ‚ğæ“¾‚·‚é
+        //è‡ªèº«ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®æƒ…å ±ã‚’å–å¾—ã™ã‚‹
         List<StatusInfo> infos = statusManager.GetStatusInfoArray(gameObject.tag);
 
-        //ƒXƒe[ƒ^ƒX‚ğƒRƒ“ƒgƒ[ƒ‰[‚É“n‚·
+        //ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã«æ¸¡ã™
         m_statusCs.AddStatuses(infos);
     }
 
-    //XVˆ—
+    //æ›´æ–°å‡¦ç†
     public virtual void StarUpdate()
     {
-        //ˆÚ“®ˆ—
+        //ç§»å‹•å‡¦ç†
         Move();
 
-        //‰ñ“]ˆ—
+        //å›è»¢å‡¦ç†
         Rotation();
 
-        //Šg‘åk¬ˆ—
+        //æ‹¡å¤§ç¸®å°å‡¦ç†
         Scaling();
     }
 
-    //I—¹ˆ—
+    //çµ‚äº†å‡¦ç†
     public virtual void StarFinal()
     {
 
     }
 
     /// <summary>
-    /// State‚ÌŠÔ‚ğŠÇ—‚·‚é
-    /// ƒQƒbƒ^[@ƒZƒbƒ^[
+    /// Stateã®æ™‚é–“ã‚’ç®¡ç†ã™ã‚‹
+    /// ã‚²ãƒƒã‚¿ãƒ¼ã€€ã‚»ãƒƒã‚¿ãƒ¼
     /// </summary>
     public float time
     {
@@ -118,8 +118,8 @@ public abstract class StarBase : Movement, IStarBase
     }
 
     /// <summary>
-    /// ƒ_ƒ[ƒW—p‚Ìƒtƒ‰ƒO‚ğŠÇ—‚·‚é
-    /// ƒQƒbƒ^[@ƒZƒbƒ^[
+    /// ãƒ€ãƒ¡ãƒ¼ã‚¸ç”¨ã®ãƒ•ãƒ©ã‚°ã‚’ç®¡ç†ã™ã‚‹
+    /// ã‚²ãƒƒã‚¿ãƒ¼ã€€ã‚»ãƒƒã‚¿ãƒ¼
     /// </summary>
     public bool damage
     {
@@ -128,8 +128,8 @@ public abstract class StarBase : Movement, IStarBase
     }
 
     /// <summary>
-    /// €–S—p‚Ìƒtƒ‰ƒO‚ğŠÇ—‚·‚é
-    /// ƒQƒbƒ^[@ƒZƒbƒ^[
+    /// æ­»äº¡ç”¨ã®ãƒ•ãƒ©ã‚°ã‚’ç®¡ç†ã™ã‚‹
+    /// ã‚²ãƒƒã‚¿ãƒ¼ã€€ã‚»ãƒƒã‚¿ãƒ¼
     /// </summary>
     public bool deth
     {
@@ -138,8 +138,8 @@ public abstract class StarBase : Movement, IStarBase
     }
 
     /// <summary>
-    /// ƒXƒe[ƒ^ƒX‚ÌƒRƒ“ƒgƒ[ƒ‰[‚ğæ“¾‚·‚é
-    /// ƒQƒbƒ^[
+    /// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã‚’å–å¾—ã™ã‚‹
+    /// ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     public StatusController statusCs { get { return m_statusCs; } }
 }

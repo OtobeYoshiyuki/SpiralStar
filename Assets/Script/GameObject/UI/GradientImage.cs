@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -42,7 +42,7 @@ public class GradientImage : BaseMeshEffect
     }
     protected void SetVertexColor()
     {
-        // ’¸“_ƒJƒ‰[‚Ìİ’è
+        // é ‚ç‚¹ã‚«ãƒ©ãƒ¼ã®è¨­å®š
         for (var i = 0; i < _vertexList.Count; i++)
         {
             var vertex = _vertexList[i];
@@ -73,7 +73,7 @@ public class GradientImage : BaseMeshEffect
         }
     }
     /// <summary>
-    /// Image ‚Ì Mesh‡ ¶‰º ¶ã ‰Eã, ‰Eã ‰E‰º ¶‰º
+    /// Image ã® Meshé † å·¦ä¸‹ å·¦ä¸Š å³ä¸Š, å³ä¸Š å³ä¸‹ å·¦ä¸‹
     /// </summary>
     private void Divide(int startIndex, float targetValue)
     {
