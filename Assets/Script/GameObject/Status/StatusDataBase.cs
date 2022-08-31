@@ -1,41 +1,41 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ƒXƒe[ƒ^ƒX‚Ìƒf[ƒ^ƒx[ƒX
+/// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹
 /// </summary>
 [System.Serializable]
 public class StatusDataBase
 {
     /// <summary>
-    /// ƒXƒe[ƒ^ƒX‚Ìƒf[ƒ^ƒx[ƒX
-    /// Inspecter‚©‚ç•ÒW‚Å‚«‚é‚æ‚¤‚É‚·‚é
+    /// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹
+    /// Inspecterã‹ã‚‰ç·¨é›†ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
     /// </summary>
     [SerializeField]
     private List<StatusInfo> m_infoList = new List<StatusInfo>();
 
     /// <summary>
-    /// ƒXƒe[ƒ^ƒX‚ÌÅ‘å’l‚Ì˜A‘z”z—ñ
+    /// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®æœ€å¤§å€¤ã®é€£æƒ³é…åˆ—
     /// </summary>
     private Dictionary<string, float> m_maxStatusList = new Dictionary<string, float>();
 
     /// <summary>
-    /// ƒXƒe[ƒ^ƒX‚Ìƒf[ƒ^ƒx[ƒX‚Ì‰Šú‰»
+    /// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã®åˆæœŸåŒ–
     /// </summary>
     public void InitDataBase()
     {
         foreach(StatusInfo info in m_infoList)
         {
-            //ƒf[ƒ^ƒx[ƒX‚Ì”z—ñ‚Ì’†g‚ğ˜A‘z”z—ñ‚Éİ’è‚·‚é
+            //ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã®é…åˆ—ã®ä¸­èº«ã‚’é€£æƒ³é…åˆ—ã«è¨­å®šã™ã‚‹
             m_maxStatusList.Add(info.tag, info.status);
         }
     }
 
     /// <summary>
-    /// w’è‚µ‚½key‚ÌƒXƒe[ƒ^ƒX‚ğæ“¾‚·‚é
+    /// æŒ‡å®šã—ãŸkeyã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’å–å¾—ã™ã‚‹
     /// </summary>
-    /// <param name="key">˜A‘z”z—ñ‚Ìkey</param>
-    /// <returns>w’è‚µ‚½ƒXƒe[ƒ^ƒX</returns>
+    /// <param name="key">é€£æƒ³é…åˆ—ã®key</param>
+    /// <returns>æŒ‡å®šã—ãŸã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹</returns>
     public float MaxStatus(string key) { return m_maxStatusList[key]; }
 }

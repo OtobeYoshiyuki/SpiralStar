@@ -1,42 +1,41 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BalanStar : BlackStar
 {
-
     /// <summary>
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     public BalanStar():base()
     {
-        //BlackRotation‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬
+        //BlackRotationã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ
         m_rotateState = new BlackRotation();
 
-        //BlackMove‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬
+        //BlackMoveã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ
         m_moveState = new BlackMove();
 
-        //BlackCollision‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬
+        //BlackCollisionã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ
         m_collisionState = new BlackCollision();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        //‰Šú‰»ˆ—
+        //åˆæœŸåŒ–å‡¦ç†
         StarInit();
 
-        //StateMachine‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬
+        //StateMachineã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ
         m_stateMachine = new StateMachine<BlackStar>(this, m_rotateState);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //XVˆ—
+        //æ›´æ–°å‡¦ç†
         StarUpdate();
 
-        //StateMachine‚ÌXV
+        //StateMachineã®æ›´æ–°
         m_stateMachine.UpdateState();
     }
 }

@@ -1,40 +1,40 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// SpiralStar‚ªÕ“Ë‚µ‚½State
-/// StateBase‚ğŒp³
-/// ƒeƒ“ƒvƒŒ[ƒg‚Ì•û‚ÍAƒCƒ“ƒXƒ^ƒ“ƒX‚ÌŠ—LÒ‚ÌSpiralStar‚ğw’è
+/// SpiralStarãŒè¡çªã—ãŸState
+/// StateBaseã‚’ç¶™æ‰¿
+/// ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã®æ–¹ã¯ã€ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ‰€æœ‰è€…ã®SpiralStarã‚’æŒ‡å®š
 /// </summary>
 public class SpiralCollision : StateBase<SpiralStar>
 {
     /// <summary>
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     public SpiralCollision() { }
 
     /// <summary>
-    /// State‚ÌÀsˆ—
+    /// Stateã®å®Ÿè¡Œå‡¦ç†
     /// </summary>
-    /// <param name="owner">ƒCƒ“ƒXƒ^ƒ“ƒX‚ÌŠ—LÒ</param>
+    /// <param name="owner">ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ‰€æœ‰è€…</param>
     public override void OnExecute(SpiralStar owner)
     {
     }
 
     /// <summary>
-    /// State‚ÌŠJnˆ—
+    /// Stateã®é–‹å§‹å‡¦ç†
     /// </summary>
-    /// <param name="owner">ƒCƒ“ƒXƒ^ƒ“ƒX‚ÌŠ—LÒ</param>
-    /// <param name="preState">‘O‰ñ‚ÌƒXƒe[ƒg</param>
+    /// <param name="owner">ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ‰€æœ‰è€…</param>
+    /// <param name="preState">å‰å›ã®ã‚¹ãƒ†ãƒ¼ãƒˆ</param>
     public override void OnEnter(SpiralStar owner, StateBase<SpiralStar> preState)
     {
     }
 
     /// <summary>
-    /// State‚ªI—¹ˆ—
+    /// StateãŒçµ‚äº†å‡¦ç†
     /// </summary>
-    /// <param name="owner">ƒCƒ“ƒXƒ^ƒ“ƒX‚ÌŠ—LÒ</param>
-    /// <param name="nextState">Ÿ‚ÌState</param>
+    /// <param name="owner">ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ‰€æœ‰è€…</param>
+    /// <param name="nextState">æ¬¡ã®State</param>
     public override void OnExit(SpiralStar owner, StateBase<SpiralStar> nextState) { }
 }

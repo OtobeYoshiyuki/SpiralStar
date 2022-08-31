@@ -1,119 +1,119 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Star‚Ìƒ`ƒƒ[ƒW‚·‚éUI‚ğŠÇ—‚·‚éƒNƒ‰ƒX
-/// Game’†‚É1‚Â‚µ‚©‘¶İ‚µ‚È‚¢‚Ì‚ÅASingleton‚ğŒp³
+/// Starã®ãƒãƒ£ãƒ¼ã‚¸ã™ã‚‹UIã‚’ç®¡ç†ã™ã‚‹ã‚¯ãƒ©ã‚¹
+/// Gameä¸­ã«1ã¤ã—ã‹å­˜åœ¨ã—ãªã„ã®ã§ã€Singletonã‚’ç¶™æ‰¿
 /// </summary>
 public class StarChaegeUI : Singleton<StarChaegeUI>
 {
     /// <summary>
-    /// ƒ`ƒƒ[ƒW‚Ì‘ÎÛ‚Æ‚È‚éGameObject
-    /// Inspecter‚©‚ç•ÒW‚Å‚«‚é‚æ‚¤‚É‚·‚é
+    /// ãƒãƒ£ãƒ¼ã‚¸ã®å¯¾è±¡ã¨ãªã‚‹GameObject
+    /// Inspecterã‹ã‚‰ç·¨é›†ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
     /// </summary>
     [SerializeField]
     private GameObject m_skyChaegeStar = null;
 
     /// <summary>
-    /// Text‚ÌCompoment‚ğ‚ÂGameObject
-    /// Inspecter‚©‚ç•ÒW‚Å‚«‚é‚æ‚¤‚É‚·‚é
+    /// Textã®Compomentã‚’æŒã¤GameObject
+    /// Inspecterã‹ã‚‰ç·¨é›†ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
     /// </summary>
     [SerializeField]
     private GameObject m_speedTextObject = null;
 
     /// <summary>
-    /// UIObject‚ÌImageCompoment‚ğŠi”[‚·‚é•Ï”
+    /// UIObjectã®ImageCompomentã‚’æ ¼ç´ã™ã‚‹å¤‰æ•°
     /// </summary>
     private Image m_chargeUI = null;
 
     /// <summary>
-    /// TextObject‚ÌTextComponent‚ğŠi”[‚·‚é•Ï”
+    /// TextObjectã®TextComponentã‚’æ ¼ç´ã™ã‚‹å¤‰æ•°
     /// </summary>
     private Text m_speedTextUI = null;
 
     /// <summary>
-    /// ƒ`ƒƒ[ƒW‚ÌÅ‘å’l
-    /// ’è”
+    /// ãƒãƒ£ãƒ¼ã‚¸ã®æœ€å¤§å€¤
+    /// å®šæ•°
     /// </summary>
     public const float MAXCHARGE = 1.0f;
 
     /// <summary>
-    /// ƒ`ƒƒ[ƒW‚Ì‰Šú’l
-    /// ’è”
+    /// ãƒãƒ£ãƒ¼ã‚¸ã®åˆæœŸå€¤
+    /// å®šæ•°
     /// </summary>
     public const float INITCHARGE = 0.0f;
 
     /// <summary>
-    /// Å‘å‚ÌŒ…”
-    /// ’è”
+    /// æœ€å¤§ã®æ¡æ•°
+    /// å®šæ•°
     /// </summary>
     public const int MAX_NUMBER = 3;
 
     /// <summary>
-    /// UI‚É•\¦‚³‚ê‚Ä‚¢‚éÅ¬’l‚Ì‘¬“x
+    /// UIã«è¡¨ç¤ºã•ã‚Œã¦ã„ã‚‹æœ€å°å€¤ã®é€Ÿåº¦
     /// </summary>
     public const float MIN_SPEED = 3.0f;
 
     /// <summary>
-    /// 1ƒtƒŒ[ƒ€‚²‚Æ‚ÌUI‚É•\¦‚³‚ê‚Ä‚¢‚é—Í
+    /// 1ãƒ•ãƒ¬ãƒ¼ãƒ ã”ã¨ã®UIã«è¡¨ç¤ºã•ã‚Œã¦ã„ã‚‹åŠ›
     /// </summary>
     private float m_power = 0.0f;
 
     /// <summary>
-    /// ƒ`ƒƒ[ƒW‚µ‚Ä‚¢‚é‚Æ‚«‚ÉŒÄ‚Î‚ê‚é
+    /// ãƒãƒ£ãƒ¼ã‚¸ã—ã¦ã„ã‚‹ã¨ãã«å‘¼ã°ã‚Œã‚‹
     /// </summary>
     public void OnCharge()
     {
-        //ƒQ[ƒW‚Ì”ä—¦‚ªÅ‘å’l–¢–‚Ì
+        //ã‚²ãƒ¼ã‚¸ã®æ¯”ç‡ãŒæœ€å¤§å€¤æœªæº€ã®æ™‚
         if(m_chargeUI.fillAmount < MAXCHARGE)
         {
-            //ƒQ[ƒW‚Ì”ä—¦‚ğ‰ÁZ‚·‚é
+            //ã‚²ãƒ¼ã‚¸ã®æ¯”ç‡ã‚’åŠ ç®—ã™ã‚‹
             m_chargeUI.fillAmount += Time.deltaTime;
         }
     }
 
     /// <summary>
-    /// ƒ`ƒƒ[ƒW’†‚ÉAƒ{ƒ^ƒ“‚ª—£‚³‚ê‚½‚ç
-    /// ŒÄ‚Î‚ê‚é
+    /// ãƒãƒ£ãƒ¼ã‚¸ä¸­ã«Aãƒœã‚¿ãƒ³ãŒé›¢ã•ã‚ŒãŸã‚‰
+    /// å‘¼ã°ã‚Œã‚‹
     /// </summary>
     public void OnReset()
     {
-        //ƒQ[ƒW‚ğ‰Šú‰»‚·‚é
+        //ã‚²ãƒ¼ã‚¸ã‚’åˆæœŸåŒ–ã™ã‚‹
         m_chargeUI.fillAmount = INITCHARGE;
     }
 
     /// <summary>
-    /// ƒeƒLƒXƒg‚ğ•\¦—p‚É‰ÁH‚·‚éˆ—
+    /// ãƒ†ã‚­ã‚¹ãƒˆã‚’è¡¨ç¤ºç”¨ã«åŠ å·¥ã™ã‚‹å‡¦ç†
     /// </summary>
-    /// <param name="star">ƒCƒ“ƒXƒ^ƒ“ƒX‚ÌŠ—LÒ</param>
+    /// <param name="star">ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ‰€æœ‰è€…</param>
     public void ManufacturingText(SpiralStar star)
     {
-        //Œ»İ‚ÌƒxƒNƒgƒ‹‚ğæ“¾i•¨—ƒGƒ“ƒWƒ“‚©‚çj
+        //ç¾åœ¨ã®ãƒ™ã‚¯ãƒˆãƒ«ã‚’å–å¾—ï¼ˆç‰©ç†ã‚¨ãƒ³ã‚¸ãƒ³ã‹ã‚‰ï¼‰
         Vector2 vel = star.rigidBody2D.velocity;
 
-        //ƒxƒNƒgƒ‹‚Ì’·‚³‚ğæ“¾
+        //ãƒ™ã‚¯ãƒˆãƒ«ã®é•·ã•ã‚’å–å¾—
         m_power = vel.magnitude * 10;
 
-        //‘¬“x‚ªˆê’èˆÈ‰º‚Ì‚à‚Ì‚Í•\¦‚ğ‹­§“I‚É0‚É‚·‚é
+        //é€Ÿåº¦ãŒä¸€å®šä»¥ä¸‹ã®ã‚‚ã®ã¯è¡¨ç¤ºã‚’å¼·åˆ¶çš„ã«0ã«ã™ã‚‹
         m_speedTextUI.text = m_power > MIN_SPEED ? Utility.ValueCustomFrontString(m_power, "f0", MAX_NUMBER, "0") : "000";
     }
 
     /// <summary>
-    /// ‰Šú‰»ˆ—
+    /// åˆæœŸåŒ–å‡¦ç†
     /// </summary>
     protected override void Init()
     {
-        //ImageComponent‚ğæ“¾
+        //ImageComponentã‚’å–å¾—
         m_chargeUI = m_skyChaegeStar.GetComponent<Image>();
 
-        //TextComponent‚ğæ“¾
+        //TextComponentã‚’å–å¾—
         m_speedTextUI = m_speedTextObject.GetComponent<Text>();
     }
 
     /// <summary>
-    /// ”pŠüˆ—
+    /// å»ƒæ£„å‡¦ç†
     /// </summary>
     protected override void Release()
     {
@@ -121,19 +121,19 @@ public class StarChaegeUI : Singleton<StarChaegeUI>
 
 
     /// <summary>
-    /// ImageComponent‚ğæ“¾
-    /// ƒQƒbƒ^[
+    /// ImageComponentã‚’å–å¾—
+    /// ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     public Image image { get { return m_chargeUI; } }
 
     /// <summary>
-    /// TextComponent‚ğæ“¾
-    /// ƒQƒbƒ^[
+    /// TextComponentã‚’å–å¾—
+    /// ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     public Text cText { get { return m_speedTextUI; } }
 
     /// <summary>
-    /// Player‚Ì—Í‚ğæ“¾‚·‚é
+    /// Playerã®åŠ›ã‚’å–å¾—ã™ã‚‹
     /// </summary>
     public float power { get { return m_power; } }
 }

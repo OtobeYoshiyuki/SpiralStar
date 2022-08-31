@@ -1,57 +1,57 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// SpiralStar‚ª‰ñ“]‚·‚éState
-/// StateBase‚ğŒp³
-/// ƒeƒ“ƒvƒŒ[ƒg‚Ì•û‚ÍAƒCƒ“ƒXƒ^ƒ“ƒX‚ÌŠ—LÒ‚ÌSpiralStar‚ğw’è
+/// SpiralStarãŒå›è»¢ã™ã‚‹State
+/// StateBaseã‚’ç¶™æ‰¿
+/// ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã®æ–¹ã¯ã€ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ‰€æœ‰è€…ã®SpiralStarã‚’æŒ‡å®š
 /// </summary>
 public class SpiralMove : StateBase<SpiralStar>
 {
     /// <summary>
-    /// •ûŒü‚ğ¦‚·ƒxƒNƒgƒ‹
+    /// æ–¹å‘ã‚’ç¤ºã™ãƒ™ã‚¯ãƒˆãƒ«
     /// </summary>
     private Vector3 m_dir = Vector3.zero;
 
     /// <summary>
-    /// ƒxƒNƒgƒ‹‚Ì”{—¦
+    /// ãƒ™ã‚¯ãƒˆãƒ«ã®å€ç‡
     /// </summary>
     private float m_scalar = 0.0f;
 
     /// <summary>
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     public SpiralMove() { }
 
     /// <summary>
-    /// State‚ÌÀsˆ—
+    /// Stateã®å®Ÿè¡Œå‡¦ç†
     /// </summary>
-    /// <param name="owner">ƒCƒ“ƒXƒ^ƒ“ƒX‚ÌŠ—LÒ</param>
+    /// <param name="owner">ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ‰€æœ‰è€…</param>
     public override void OnExecute(SpiralStar owner)
     {
-        //•¨—ƒGƒ“ƒWƒ“‚ÌƒxƒNƒgƒ‹‚ğæ“¾
+        //ç‰©ç†ã‚¨ãƒ³ã‚¸ãƒ³ã®ãƒ™ã‚¯ãƒˆãƒ«ã‚’å–å¾—
         Vector2 vel = owner.rigidBody2D.velocity;
 
-        //SpiralStar‚ğ‰ñ“]‚³‚¹‚é
+        //SpiralStarã‚’å›è»¢ã•ã›ã‚‹
         owner.rotAngle += new Vector3(0,0,4) * Mathf.Clamp(vel.magnitude,0.0f,7.0f);
 
-        //ƒxƒNƒgƒ‹‚Ì’·‚³‚ªÅ¬’l‚æ‚è‘å‚«‚¢‚Æ‚«
+        //ãƒ™ã‚¯ãƒˆãƒ«ã®é•·ã•ãŒæœ€å°å€¤ã‚ˆã‚Šå¤§ãã„ã¨ã
         if (vel.magnitude > SpiralStar.MIN_MOVE_LIMIT)
         {
-            //ƒxƒNƒgƒ‹‚ğ³‹K‰»
+            //ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ­£è¦åŒ–
             vel.Normalize();
 
-            //ƒxƒNƒgƒ‹‚ğ”½“]
+            //ãƒ™ã‚¯ãƒˆãƒ«ã‚’åè»¢
             vel *= -1;
 
-            //•¨—ƒGƒ“ƒWƒ“‚Å—Í‚ğ‰Á‚¦‚é
+            //ç‰©ç†ã‚¨ãƒ³ã‚¸ãƒ³ã§åŠ›ã‚’åŠ ãˆã‚‹
             owner.rigidBody2D.AddForce(vel / 3, ForceMode2D.Force);
         }
-        //ƒxƒNƒgƒ‹‚Ì’·‚³‚ªÅ¬’lˆÈ‰º‚Ì
+        //ãƒ™ã‚¯ãƒˆãƒ«ã®é•·ã•ãŒæœ€å°å€¤ä»¥ä¸‹ã®æ™‚
         else
         {
-            //ƒxƒNƒgƒ‹‚ğƒ[ƒ‚É‚·‚é
+            //ãƒ™ã‚¯ãƒˆãƒ«ã‚’ã‚¼ãƒ­ã«ã™ã‚‹
             owner.rigidBody2D.velocity = Vector2.zero;
         }
 
@@ -59,26 +59,26 @@ public class SpiralMove : StateBase<SpiralStar>
     }
 
     /// <summary>
-    /// State‚ÌŠJnˆ—
+    /// Stateã®é–‹å§‹å‡¦ç†
     /// </summary>
-    /// <param name="owner">ƒCƒ“ƒXƒ^ƒ“ƒX‚ÌŠ—LÒ</param>
-    /// <param name="preState">‘O‰ñ‚ÌƒXƒe[ƒg</param>
+    /// <param name="owner">ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ‰€æœ‰è€…</param>
+    /// <param name="preState">å‰å›ã®ã‚¹ãƒ†ãƒ¼ãƒˆ</param>
     public override void OnEnter(SpiralStar owner, StateBase<SpiralStar> preState) 
     {
-        //•¨—ƒGƒ“ƒWƒ“‚Å—Í‚ğ‰Á‚¦‚é
+        //ç‰©ç†ã‚¨ãƒ³ã‚¸ãƒ³ã§åŠ›ã‚’åŠ ãˆã‚‹
         owner.rigidBody2D.AddForce(m_dir * m_scalar, ForceMode2D.Impulse);
     }
 
     /// <summary>
-    /// State‚ªI—¹ˆ—
+    /// StateãŒçµ‚äº†å‡¦ç†
     /// </summary>
-    /// <param name="owner">ƒCƒ“ƒXƒ^ƒ“ƒX‚ÌŠ—LÒ</param>
-    /// <param name="nextState">Ÿ‚ÌState</param>
+    /// <param name="owner">ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ‰€æœ‰è€…</param>
+    /// <param name="nextState">æ¬¡ã®State</param>
     public override void OnExit(SpiralStar owner, StateBase<SpiralStar> nextState) { }
 
     /// <summary>
-    /// •ûŒü‚ğ¦‚·ƒxƒNƒgƒ‹
-    /// ƒZƒbƒ^[@ƒQƒbƒ^[
+    /// æ–¹å‘ã‚’ç¤ºã™ãƒ™ã‚¯ãƒˆãƒ«
+    /// ã‚»ãƒƒã‚¿ãƒ¼ã€€ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     public Vector3 Direct
     {
@@ -87,8 +87,8 @@ public class SpiralMove : StateBase<SpiralStar>
     }
 
     /// <summary>
-    /// ƒxƒNƒgƒ‹‚Ì”{—¦
-    /// ƒZƒbƒ^[AƒQƒbƒ^[
+    /// ãƒ™ã‚¯ãƒˆãƒ«ã®å€ç‡
+    /// ã‚»ãƒƒã‚¿ãƒ¼ã€ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     public float Scalar 
     {

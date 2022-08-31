@@ -1,31 +1,31 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// State‚ÌŠî’êƒNƒ‰ƒX
-/// ƒWƒFƒlƒŠƒbƒNŒ^
-/// §–ñFStateBase‚ğŒp³‚µ‚È‚¯‚ê‚Î‚È‚ç‚È‚¢
+/// Stateã®åŸºåº•ã‚¯ãƒ©ã‚¹
+/// ã‚¸ã‚§ãƒãƒªãƒƒã‚¯å‹
+/// åˆ¶ç´„ï¼šStateBaseã‚’ç¶™æ‰¿ã—ãªã‘ã‚Œã°ãªã‚‰ãªã„
 /// </summary>
 public abstract class StateBase<T> where T : class
 {
     /// <summary>
-    /// State‚ÌÀsˆ—
+    /// Stateã®å®Ÿè¡Œå‡¦ç†
     /// </summary>
-    /// <param name="owner">ƒCƒ“ƒXƒ^ƒ“ƒX‚ÌŠ—LÒ</param>
+    /// <param name="owner">ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ‰€æœ‰è€…</param>
     public virtual void OnExecute(T owner) { }
 
     /// <summary>
-    /// State‚ÌŠJnˆ—
+    /// Stateã®é–‹å§‹å‡¦ç†
     /// </summary>
-    /// <param name="owner">ƒCƒ“ƒXƒ^ƒ“ƒX‚ÌŠ—LÒ</param>
-    /// <param name="preState">‘O‰ñ‚ÌƒXƒe[ƒg</param>
+    /// <param name="owner">ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ‰€æœ‰è€…</param>
+    /// <param name="preState">å‰å›ã®ã‚¹ãƒ†ãƒ¼ãƒˆ</param>
     public virtual void OnEnter(T owner,StateBase<T> preState) { }
 
     /// <summary>
-    /// State‚ªI—¹ˆ—
+    /// StateãŒçµ‚äº†å‡¦ç†
     /// </summary>
-    /// <param name="owner">ƒCƒ“ƒXƒ^ƒ“ƒX‚ÌŠ—LÒ</param>
-    /// <param name="nextState">Ÿ‚ÌState</param>
+    /// <param name="owner">ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ‰€æœ‰è€…</param>
+    /// <param name="nextState">æ¬¡ã®State</param>
     public virtual void OnExit(T owner,StateBase<T> nextState) { }
 }

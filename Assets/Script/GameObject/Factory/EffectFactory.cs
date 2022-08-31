@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,36 +20,36 @@ public class EffectFactory : Singleton<EffectFactory>
     }
 
     /// <summary>
-    /// ƒCƒ“ƒXƒ^ƒ“ƒX‚Ì‰Šú‰»ˆ—
+    /// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®åˆæœŸåŒ–å‡¦ç†
     /// </summary>
     protected override void Init()
     {
     }
 
     /// <summary>
-    /// GameObject‚Ì‰ğ•úˆ—
+    /// GameObjectã®è§£æ”¾å‡¦ç†
     /// </summary>
     protected override void Release()
     {
     }
 
     /// <summary>
-    /// Õ“Ë‚ÌƒGƒtƒFƒNƒg‚Ì¶¬
+    /// è¡çªæ™‚ã®ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®ç”Ÿæˆ
     /// </summary>
-    /// <param name="star">Star‚ÌƒCƒ“ƒXƒ^ƒ“ƒX</param>
+    /// <param name="star">Starã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</param>
     [System.Obsolete]
     public void SpawnStarEffect(StarBase star)
     {
-        //SpriteRenderer‚ğæ“¾‚·‚é
+        //SpriteRendererã‚’å–å¾—ã™ã‚‹
         SpriteRenderer sprite = star.GetComponent<SpriteRenderer>();
 
-        //effect‚ÌGameObject‚ğ¶¬
+        //effectã®GameObjectã‚’ç”Ÿæˆ
         ParticleSystem starEffect = Instantiate(m_starEffect,star.transform.position,Quaternion.identity);
 
-        //effect‚ÌF‚ğ•ÏX‚·‚é
+        //effectã®è‰²ã‚’å¤‰æ›´ã™ã‚‹
         starEffect.startColor = sprite.color;
 
-        //ƒGƒtƒFƒNƒg‚ğÄ¶‚·‚é
+        //ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’å†ç”Ÿã™ã‚‹
         starEffect.Play();
     }
 }

@@ -1,124 +1,124 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Ã“IƒNƒ‰ƒX
-/// ‚Ù‚©‚ÌGameObject‚ÉƒAƒ^ƒbƒ`‚·‚é•K—v‚ª‚È‚¢‚Ì‚ÅA
-/// Monobehaviour‚âSingleton‚ÍŒp³‚·‚é•K—v‚ª‚È‚¢
-/// Scene‚ğ‚Ü‚½‚¢‚Åî•ñ‚ğó‚¯“n‚µ‚·‚éê‡‚È‚Ç‚Ég—p‚·‚é
+/// é™çš„ã‚¯ãƒ©ã‚¹
+/// ã»ã‹ã®GameObjectã«ã‚¢ã‚¿ãƒƒãƒã™ã‚‹å¿…è¦ãŒãªã„ã®ã§ã€
+/// Monobehaviourã‚„Singletonã¯ç¶™æ‰¿ã™ã‚‹å¿…è¦ãŒãªã„
+/// Sceneã‚’ã¾ãŸã„ã§æƒ…å ±ã‚’å—ã‘æ¸¡ã—ã™ã‚‹å ´åˆãªã©ã«ä½¿ç”¨ã™ã‚‹
 /// </summary>
 public static class GameData
 {
     /// <summary>
     /// key:String
     /// Value:Int
-    /// w’è‚µ‚½ƒL[‚É’l‚ğ‘ã“ü‚·‚é
+    /// æŒ‡å®šã—ãŸã‚­ãƒ¼ã«å€¤ã‚’ä»£å…¥ã™ã‚‹
     /// </summary>
     private static Dictionary<string, int> s_intDirect = new Dictionary<string, int>();
 
     /// <summary>
     /// key:String
     /// Value:Float
-    /// w’è‚µ‚½ƒL[‚É’l‚ğ‘ã“ü‚·‚é
+    /// æŒ‡å®šã—ãŸã‚­ãƒ¼ã«å€¤ã‚’ä»£å…¥ã™ã‚‹
     /// </summary>
     private static Dictionary<string, float> s_floatDirect = new Dictionary<string, float>();
 
     /// <summary>
     /// key:String
     /// Value:String
-    /// w’è‚µ‚½ƒL[‚É’l‚ğ‘ã“ü‚·‚é
+    /// æŒ‡å®šã—ãŸã‚­ãƒ¼ã«å€¤ã‚’ä»£å…¥ã™ã‚‹
     /// </summary>
     private static Dictionary<string, string> s_stringDirect = new Dictionary<string, string>();
 
     /// <summary>
     /// key:String
     /// Value:GameObject
-    /// w’è‚µ‚½ƒL[‚É’l‚ğ‘ã“ü‚·‚é
+    /// æŒ‡å®šã—ãŸã‚­ãƒ¼ã«å€¤ã‚’ä»£å…¥ã™ã‚‹
     /// </summary>
     private static Dictionary<string, GameObject> s_objectDirect = new Dictionary<string, GameObject>();
 
     /// <summary>
-    /// Dictionary‚Ìkey‚Évalue‚ğ’Ç‰Á‚·‚é
+    /// Dictionaryã®keyã«valueã‚’è¿½åŠ ã™ã‚‹
     /// </summary>
-    /// <param name="key">ƒL[</param>
-    /// <param name="value">’l</param>
+    /// <param name="key">ã‚­ãƒ¼</param>
+    /// <param name="value">å€¤</param>
     public static void AddInt(in string key,in int value) { s_intDirect[key] = value; }
 
     /// <summary>
-    /// Dictionary‚Ìkey‚Évalue‚ğ’Ç‰Á‚·‚é
+    /// Dictionaryã®keyã«valueã‚’è¿½åŠ ã™ã‚‹
     /// </summary>
-    /// <param name="key">ƒL[</param>
-    /// <param name="value">’l</param>
+    /// <param name="key">ã‚­ãƒ¼</param>
+    /// <param name="value">å€¤</param>
     public static void AddFloat(in string key,in float value) { s_floatDirect[key] = value; }
 
     /// <summary>
-    /// Dictionary‚Ìkey‚Évalue‚ğ’Ç‰Á‚·‚é
+    /// Dictionaryã®keyã«valueã‚’è¿½åŠ ã™ã‚‹
     /// </summary>
-    /// <param name="key">ƒL[</param>
-    /// <param name="value">’l</param>
+    /// <param name="key">ã‚­ãƒ¼</param>
+    /// <param name="value">å€¤</param>
     public static void AddString(in string key,in string value) { s_stringDirect[key] = value; }
 
     /// <summary>
-    /// Dictionary‚Ìkey‚Évalue‚ğ’Ç‰Á‚·‚é
+    /// Dictionaryã®keyã«valueã‚’è¿½åŠ ã™ã‚‹
     /// </summary>
-    /// <param name="key">ƒL[</param>
-    /// <param name="value">’l</param>
+    /// <param name="key">ã‚­ãƒ¼</param>
+    /// <param name="value">å€¤</param>
     public static void AddGameObject(in string key,GameObject value) { s_objectDirect[key] = value; }
 
     /// <summary>
-    /// Dictionary‚Ìkey‚É‘Î‰‚·‚évalue‚ğ•Ô‚·
+    /// Dictionaryã®keyã«å¯¾å¿œã™ã‚‹valueã‚’è¿”ã™
     /// </summary>
-    /// <param name="key">ƒL[</param>
+    /// <param name="key">ã‚­ãƒ¼</param>
     /// <returns>value</returns>
     public static int IntValue(in string key) { return s_intDirect[key]; }
 
     /// <summary>
-    /// Dictionary‚Ìkey‚É‘Î‰‚·‚évalue‚ğ•Ô‚·
+    /// Dictionaryã®keyã«å¯¾å¿œã™ã‚‹valueã‚’è¿”ã™
     /// </summary>
-    /// <param name="key">ƒL[</param>
+    /// <param name="key">ã‚­ãƒ¼</param>
     /// <returns>value</returns>
     public static float FloatValue(in string key) { return s_floatDirect[key]; }
 
     /// <summary>
-    /// Dictionary‚Ìkey‚É‘Î‰‚·‚évalue‚ğ•Ô‚·
+    /// Dictionaryã®keyã«å¯¾å¿œã™ã‚‹valueã‚’è¿”ã™
     /// </summary>
-    /// <param name="key">ƒL[</param>
+    /// <param name="key">ã‚­ãƒ¼</param>
     /// <returns>value</returns>
     public static string StringValue(in string key) { return s_stringDirect[key]; }
 
     /// <summary>
-    /// Dictionary‚Ìkey‚É‘Î‰‚·‚évalue‚ğ•Ô‚·
+    /// Dictionaryã®keyã«å¯¾å¿œã™ã‚‹valueã‚’è¿”ã™
     /// </summary>
-    /// <param name="key">ƒL[</param>
+    /// <param name="key">ã‚­ãƒ¼</param>
     /// <returns>value</returns>
     public static GameObject GameObjectValue(in string key) { return s_objectDirect[key]; }
 
     /// <summary>
-    /// Dictionary‚Ìkey‚ª‘¶İ‚·‚é‚©‚Ç‚¤‚©Šm”F‚·‚é
+    /// Dictionaryã®keyãŒå­˜åœ¨ã™ã‚‹ã‹ã©ã†ã‹ç¢ºèªã™ã‚‹
     /// </summary>
-    /// <param name="key">ƒL[</param>
-    /// <returns>‘¶İ‚·‚éê‡true ‘¶İ‚µ‚È‚¢ê‡false</returns>
+    /// <param name="key">ã‚­ãƒ¼</param>
+    /// <returns>å­˜åœ¨ã™ã‚‹å ´åˆtrue å­˜åœ¨ã—ãªã„å ´åˆfalse</returns>
     public static bool FindInt(in string key) { return s_intDirect.ContainsKey(key); }
 
     /// <summary>
-    /// Dictionary‚Ìkey‚ª‘¶İ‚·‚é‚©‚Ç‚¤‚©Šm”F‚·‚é
+    /// Dictionaryã®keyãŒå­˜åœ¨ã™ã‚‹ã‹ã©ã†ã‹ç¢ºèªã™ã‚‹
     /// </summary>
-    /// <param name="key">ƒL[</param>
-    /// <returns>‘¶İ‚·‚éê‡true ‘¶İ‚µ‚È‚¢ê‡false</returns>
+    /// <param name="key">ã‚­ãƒ¼</param>
+    /// <returns>å­˜åœ¨ã™ã‚‹å ´åˆtrue å­˜åœ¨ã—ãªã„å ´åˆfalse</returns>
     public static bool FindFloat(in string key) { return s_floatDirect.ContainsKey(key); }
 
     /// <summary>
-    /// Dictionary‚Ìkey‚ª‘¶İ‚·‚é‚©‚Ç‚¤‚©Šm”F‚·‚é
+    /// Dictionaryã®keyãŒå­˜åœ¨ã™ã‚‹ã‹ã©ã†ã‹ç¢ºèªã™ã‚‹
     /// </summary>
-    /// <param name="key">ƒL[</param>
-    /// <returns>‘¶İ‚·‚éê‡true ‘¶İ‚µ‚È‚¢ê‡false</returns>
+    /// <param name="key">ã‚­ãƒ¼</param>
+    /// <returns>å­˜åœ¨ã™ã‚‹å ´åˆtrue å­˜åœ¨ã—ãªã„å ´åˆfalse</returns>
     public static bool FindString(in string key) { return s_stringDirect.ContainsKey(key); }
 
     /// <summary>
-    /// Dictionary‚Ìkey‚ª‘¶İ‚·‚é‚©‚Ç‚¤‚©Šm”F‚·‚é
+    /// Dictionaryã®keyãŒå­˜åœ¨ã™ã‚‹ã‹ã©ã†ã‹ç¢ºèªã™ã‚‹
     /// </summary>
-    /// <param name="key">ƒL[</param>
-    /// <returns>‘¶İ‚·‚éê‡true ‘¶İ‚µ‚È‚¢ê‡false</returns>
+    /// <param name="key">ã‚­ãƒ¼</param>
+    /// <returns>å­˜åœ¨ã™ã‚‹å ´åˆtrue å­˜åœ¨ã—ãªã„å ´åˆfalse</returns>
     public static bool FindGameObject(in string key) { return s_objectDirect.ContainsKey(key); }
 }

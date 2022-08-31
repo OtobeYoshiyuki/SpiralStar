@@ -1,42 +1,42 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ƒXƒe[ƒ^ƒX‚ÌƒRƒ“ƒgƒ[ƒ‰[
+/// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼
 /// </summary>
 public class StatusController 
 {
     /// <summary>
-    /// ƒXƒe[ƒ^ƒX‚Ì˜A‘z”z—ñ
-    /// •Ï“®‚·‚éƒXƒe[ƒ^ƒX‚Ì‚İƒAƒNƒZƒX‰Â”\(•Ï“®‚µ‚È‚¢‚à‚Ì‚Íƒf[ƒ^ƒx[ƒX‚ªŠÇ—‚µ‚Ä‚¢‚é)
+    /// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®é€£æƒ³é…åˆ—
+    /// å¤‰å‹•ã™ã‚‹ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®ã¿ã‚¢ã‚¯ã‚»ã‚¹å¯èƒ½(å¤‰å‹•ã—ãªã„ã‚‚ã®ã¯ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ãŒç®¡ç†ã—ã¦ã„ã‚‹)
     /// </summary>
     private Dictionary<string, float> m_status = new Dictionary<string, float>();
 
     /// <summary>
-    /// İ’è‚·‚éƒXƒe[ƒ^ƒX‚ğ“o˜^‚·‚é
+    /// è¨­å®šã™ã‚‹ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’ç™»éŒ²ã™ã‚‹
     /// </summary>
-    /// <param name="infos">ƒXƒe[ƒ^ƒX‚Ìî•ñ‚ğ‚Á‚½”z—ñ</param>
+    /// <param name="infos">ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®æƒ…å ±ã‚’æŒã£ãŸé…åˆ—</param>
     public void AddStatuses(List<StatusInfo> infos)
     {
         foreach(StatusInfo info in infos)
         {
-            //ŠY“–‚·‚éƒXƒe[ƒ^ƒX‚ğİ’è‚·‚é
+            //è©²å½“ã™ã‚‹ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’è¨­å®šã™ã‚‹
             m_status.Add(info.tag, info.status);
         }
     }
 
     /// <summary>
-    /// ‘ÎÛ‚ÌƒXƒe[ƒ^ƒX‚ğİ’è‚·‚é
+    /// å¯¾è±¡ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’è¨­å®šã™ã‚‹
     /// </summary>
-    /// <param name="key">ƒXƒe[ƒ^ƒX‚Ìkey</param>
-    /// <param name="value">ƒXƒe[ƒ^ƒX‚Ìvalue</param>
+    /// <param name="key">ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®key</param>
+    /// <param name="value">ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®value</param>
     public void SetTargetStatus(string key,float value) { m_status[key] = value; }
 
     /// <summary>
-    /// ‘ÎÛ‚ÌƒXƒe[ƒ^ƒX‚ğæ“¾‚·‚é
+    /// å¯¾è±¡ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’å–å¾—ã™ã‚‹
     /// </summary>
-    /// <param name="key">ƒXƒe[ƒ^ƒX‚Ìkey</param>
-    /// <returns>ƒXƒe[ƒ^ƒX‚ğ•Ô‚·</returns>
+    /// <param name="key">ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®key</param>
+    /// <returns>ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’è¿”ã™</returns>
     public float GetTargetStatus(string key) { return m_status[key]; }
 }

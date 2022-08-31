@@ -1,43 +1,43 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// KeyValuePair‚ÌŠg’£ƒƒ\ƒbƒh
+/// KeyValuePairã®æ‹¡å¼µãƒ¡ã‚½ãƒƒãƒ‰
 /// </summary>
 public static class KeyValueExtension
 {
     /// <summary>
-    /// V‚½‚ÈKey‚ğİ’è‚·‚é(Value‚Í‚»‚Ì‚Ü‚Ü)
+    /// æ–°ãŸãªKeyã‚’è¨­å®šã™ã‚‹(Valueã¯ãã®ã¾ã¾)
     /// </summary>
-    /// <typeparam name="Tkey">key‚ÌŒ^</typeparam>
-    /// <typeparam name="Tvalue">vakue‚ÌŒ^</typeparam>
-    /// <param name="pair">‘ÎÛ‚Ìpair‚Ì•Ï”</param>
-    /// <param name="key">V‚µ‚¢key</param>
-    /// <returns>İ’è‚µ‚È‚¨‚µ‚½pair</returns>
+    /// <typeparam name="Tkey">keyã®å‹</typeparam>
+    /// <typeparam name="Tvalue">vakueã®å‹</typeparam>
+    /// <param name="pair">å¯¾è±¡ã®pairã®å¤‰æ•°</param>
+    /// <param name="key">æ–°ã—ã„key</param>
+    /// <returns>è¨­å®šã—ãªãŠã—ãŸpair</returns>
     public static KeyValuePair<Tkey, Tvalue> SetKey<Tkey,Tvalue>(this KeyValuePair<Tkey,Tvalue> pair,Tkey key)
     {
-        //V‚½‚Ékey‚ğİ’è‚µ‚È‚¨‚·
+        //æ–°ãŸã«keyã‚’è¨­å®šã—ãªãŠã™
         pair = new KeyValuePair<Tkey, Tvalue>(key, pair.Value);
 
-        //İ’è‚µ‚È‚¨‚µ‚½pair‚ğ•Ô‚·
+        //è¨­å®šã—ãªãŠã—ãŸpairã‚’è¿”ã™
         return pair;
     }
 
     /// <summary>
-    /// V‚½‚ÈValue‚ğİ’è‚·‚é(Key‚Í‚»‚Ì‚Ü‚Ü)
+    /// æ–°ãŸãªValueã‚’è¨­å®šã™ã‚‹(Keyã¯ãã®ã¾ã¾)
     /// </summary>
-    /// <typeparam name="Tkey">key‚ÌŒ^</typeparam>
-    /// <typeparam name="Tvalue">value‚ÌŒ^</typeparam>
-    /// <param name="pair">‘ÎÛ‚Ìpair‚Ì•Ï”</param>
-    /// <param name="value">V‚µ‚¢value</param>
-    /// <returns>İ’è‚µ‚È‚¨‚µ‚½pair</returns>
+    /// <typeparam name="Tkey">keyã®å‹</typeparam>
+    /// <typeparam name="Tvalue">valueã®å‹</typeparam>
+    /// <param name="pair">å¯¾è±¡ã®pairã®å¤‰æ•°</param>
+    /// <param name="value">æ–°ã—ã„value</param>
+    /// <returns>è¨­å®šã—ãªãŠã—ãŸpair</returns>
     public static KeyValuePair<Tkey, Tvalue> SetValue<Tkey,Tvalue>(this KeyValuePair<Tkey,Tvalue> pair,Tvalue value)
     {
-        //V‚½‚Évalue‚ğİ’è‚µ‚È‚¨‚·
+        //æ–°ãŸã«valueã‚’è¨­å®šã—ãªãŠã™
         pair = new KeyValuePair<Tkey, Tvalue>(pair.Key, value);
 
-        //İ’è‚µ‚È‚¨‚µ‚½pair‚ğ•Ô‚·
+        //è¨­å®šã—ãªãŠã—ãŸpairã‚’è¿”ã™
         return pair;
     }
 }

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,60 +6,60 @@ using UnityEngine;
 public class StatusInfo
 {
     /// <summary>
-    /// ƒXƒe[ƒ^ƒX‚Ì–¼‘O
+    /// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®åå‰
     /// </summary>
     [SerializeField]
     private string m_tag = string.Empty;
 
     /// <summary>
-    /// ƒXƒe[ƒ^ƒX‚Ì’l
-    /// Inspecter‚©‚ç•ÒW‚Å‚«‚é‚æ‚¤‚É‚·‚é
+    /// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®å€¤
+    /// Inspecterã‹ã‚‰ç·¨é›†ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
     /// </summary>
     [SerializeField]
     private float m_status = 0.0f;
 
     /// <summary>
-    /// ƒ^ƒO‚ğæ“¾‚·‚é
-    /// ƒQƒbƒ^[
+    /// ã‚¿ã‚°ã‚’å–å¾—ã™ã‚‹
+    /// ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     public string tag { get { return m_tag; } }
 
     /// <summary>
-    /// ƒXƒe[ƒ^ƒX‚Ì”z—ñ‚ğæ“¾‚·‚é
-    /// ƒQƒbƒ^[
+    /// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®é…åˆ—ã‚’å–å¾—ã™ã‚‹
+    /// ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     public float status { get { return m_status; } }
 }
 
 /// <summary>
-/// ƒXƒ^[‚ÌƒXƒe[ƒ^ƒX
+/// ã‚¹ã‚¿ãƒ¼ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹
 /// </summary>
 [System.Serializable]
 public class StarStatus
 {
     /// <summary>
-    /// ƒXƒe[ƒ^ƒX‚ÌŠ—LÒ‚Ìƒ^ƒO
-    /// Inspecter‚©‚ç•ÒW‚Å‚«‚é‚æ‚¤‚É‚·‚é
+    /// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®æ‰€æœ‰è€…ã®ã‚¿ã‚°
+    /// Inspecterã‹ã‚‰ç·¨é›†ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
     /// </summary>
     [SerializeField]
     private string m_ownerTag = string.Empty;
 
     /// <summary>
-    /// ƒXƒe[ƒ^ƒX‚ÌƒŠƒXƒg
-    /// Inspecter‚©‚ç•ÒW‚Å‚«‚é‚æ‚¤‚É‚·‚é
+    /// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®ãƒªã‚¹ãƒˆ
+    /// Inspecterã‹ã‚‰ç·¨é›†ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
     /// </summary>
     [SerializeField]
     private List<StatusInfo> m_statusList = new List<StatusInfo>();
 
     /// <summary>
-    /// Š—LÒ‚Ìƒ^ƒO‚ğæ“¾‚·‚é
-    /// ƒQƒbƒ^[
+    /// æ‰€æœ‰è€…ã®ã‚¿ã‚°ã‚’å–å¾—ã™ã‚‹
+    /// ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     public string owner { get { return m_ownerTag; } }
 
     /// <summary>
-    /// ƒXƒe[ƒ^ƒX‚ÌƒŠƒXƒg‚ğæ“¾‚·‚é
-    /// ƒQƒbƒ^[
+    /// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®ãƒªã‚¹ãƒˆã‚’å–å¾—ã™ã‚‹
+    /// ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     public List<StatusInfo> statusList { get { return m_statusList; } }
 }

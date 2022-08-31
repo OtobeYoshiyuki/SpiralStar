@@ -1,65 +1,65 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Movement : MonoBehaviour
 {
-    //ƒIƒuƒWƒFƒNƒg‚Ì‰ñ“]’l
+    //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å›è»¢å€¤
     protected Vector3 m_rotAngle = Vector3.zero;
 
-    //ƒIƒuƒWƒFƒNƒg‚ğˆÚ“®‚³‚¹‚éƒXƒs[ƒh
+    //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç§»å‹•ã•ã›ã‚‹ã‚¹ãƒ”ãƒ¼ãƒ‰
     protected Vector3 m_moveSpeed = Vector3.zero;
 
-    //ƒIƒuƒWƒFƒNƒg‚ğƒXƒP[ƒŠƒ“ƒO‚³‚¹‚éƒXƒs[ƒh
+    //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ã‚¹ã‚±ãƒ¼ãƒªãƒ³ã‚°ã•ã›ã‚‹ã‚¹ãƒ”ãƒ¼ãƒ‰
     protected Vector3 m_scaleSpeed = Vector3.zero;
 
     /// <summary>
-    /// RigidBody2D‚ÌComponent
+    /// RigidBody2Dã®Component
     /// </summary>
     protected Rigidbody2D m_rigidBody2D = null;
 
     /// <summary>
-    /// CirCle‚ÌCollider
-    /// “–‚½‚è”»’è
+    /// CirCleã®Collider
+    /// å½“ãŸã‚Šåˆ¤å®š
     /// </summary>
     protected CircleCollider2D m_circleCollider2D = null;
 
     /// <summary>
-    /// •¨—ƒGƒ“ƒWƒ“‚©‚ç—Í‚ğ‰Á‚¦‚éÅ¬’l
+    /// ç‰©ç†ã‚¨ãƒ³ã‚¸ãƒ³ã‹ã‚‰åŠ›ã‚’åŠ ãˆã‚‹æœ€å°å€¤
     /// </summary>
     public const float MIN_MOVE_LIMIT = 0.03f;
 
     /// <summary>
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     protected Movement()
     {
 
     }
 
-   //ˆÚ“®ˆ—
+   //ç§»å‹•å‡¦ç†
    public void Move()
     {
-        //ƒIƒuƒWƒFƒNƒg‚ğˆÚ“®‚³‚¹‚é
+        //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç§»å‹•ã•ã›ã‚‹
         transform.position += m_moveSpeed;
     }
 
-    //‰ñ“]ˆ—
+    //å›è»¢å‡¦ç†
     public void Rotation()
     {
-        //ƒIƒuƒWƒFƒNƒg‚ğw’è‚µ‚½’l‚É‰ñ“]‚³‚¹‚é
+        //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®šã—ãŸå€¤ã«å›è»¢ã•ã›ã‚‹
         transform.rotation = Quaternion.Euler(m_rotAngle);
     }
 
-    //Šg‘åk¬
+    //æ‹¡å¤§ç¸®å°
     public void Scaling()
     {
 
     }
 
     /// <summary>
-    /// ‰ñ“]‚Ì’l
-    /// ƒQƒbƒ^[AƒZƒbƒ^[
+    /// å›è»¢ã®å€¤
+    /// ã‚²ãƒƒã‚¿ãƒ¼ã€ã‚»ãƒƒã‚¿ãƒ¼
     /// </summary>
     public Vector3 rotAngle
     {
@@ -68,8 +68,8 @@ public abstract class Movement : MonoBehaviour
     }
 
     /// <summary>
-    /// 1ƒtƒŒ[ƒ€‚ÉˆÚ“®‚³‚¹‚é’l
-    /// ƒQƒbƒ^[AƒZƒbƒ^[
+    /// 1ãƒ•ãƒ¬ãƒ¼ãƒ ã«ç§»å‹•ã•ã›ã‚‹å€¤
+    /// ã‚²ãƒƒã‚¿ãƒ¼ã€ã‚»ãƒƒã‚¿ãƒ¼
     /// </summary>
     public Vector3 moveSpeed
     {
@@ -78,8 +78,8 @@ public abstract class Movement : MonoBehaviour
     }
 
     /// <summary>
-    /// RigidBody2D‚ğæ“¾‚·‚é
-    /// ƒQƒbƒ^[
+    /// RigidBody2Dã‚’å–å¾—ã™ã‚‹
+    /// ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     public Rigidbody2D rigidBody2D
     {
@@ -88,7 +88,7 @@ public abstract class Movement : MonoBehaviour
 
     /// <summary>
     /// CircleCollider2D
-    /// ƒQƒbƒ^[
+    /// ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     public CircleCollider2D circle2D
     {

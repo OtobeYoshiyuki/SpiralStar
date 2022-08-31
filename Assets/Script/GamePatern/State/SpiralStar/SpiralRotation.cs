@@ -1,201 +1,201 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// SpiralStar‚ª‰ñ“]‚·‚éState
-/// StateBase‚ğŒp³
-/// ƒeƒ“ƒvƒŒ[ƒg‚Ì•û‚ÍAƒCƒ“ƒXƒ^ƒ“ƒX‚ÌŠ—LÒ‚ÌSpiralStar‚ğw’è
+/// SpiralStarãŒå›è»¢ã™ã‚‹State
+/// StateBaseã‚’ç¶™æ‰¿
+/// ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã®æ–¹ã¯ã€ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ‰€æœ‰è€…ã®SpiralStarã‚’æŒ‡å®š
 /// </summary>
 public class SpiralRotation : StateBase<SpiralStar>
 {
     /// <summary>
-    /// –îˆó‚ğ¶¬‚·‚éƒtƒ‰ƒO
+    /// çŸ¢å°ã‚’ç”Ÿæˆã™ã‚‹ãƒ•ãƒ©ã‚°
     /// </summary>
     private bool m_fArrowCreate = false;
 
     /// <summary>
-    /// ƒIƒuƒWƒFƒNƒg‚Ì‰ñ“]‚³‚¹‚é‘¬“x
-    /// ’è”@ƒQƒbƒ^[
+    /// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å›è»¢ã•ã›ã‚‹é€Ÿåº¦
+    /// å®šæ•°ã€€ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     public static Vector3 ROTSPEED { get { return new Vector3(0.0f, 0.0f, 15.0f); } }
 
     /// <summary>
-    /// ¶¬‚·‚é–îˆó‚Ì‘Š‘ÎÀ•W
+    /// ç”Ÿæˆã™ã‚‹çŸ¢å°ã®ç›¸å¯¾åº§æ¨™
     /// </summary>
     public static Vector3 RELATIVEARROW { get { return new Vector3(0.0f, 0.25f, 0.0f); } }
 
     /// <summary>
-    /// 180~360“x‚Ì•â³’l‚ğæ“¾
-    /// ’è”
+    /// 180~360åº¦ã®è£œæ­£å€¤ã‚’å–å¾—
+    /// å®šæ•°
     /// </summary>
     public const float MINUSANGLE = 180.0f;
 
     /// <summary>
-    /// –îˆó‚ÌÀ•W‚ÌC³
-    /// ’è”
+    /// çŸ¢å°ã®åº§æ¨™ã®ä¿®æ­£
+    /// å®šæ•°
     /// </summary>
     public const float CALCARROW_LOCATION = 0.25f;
 
     /// <summary>
-    /// ”¼ü‚ÌŠp“x
-    /// ’è”
+    /// åŠå‘¨ã®è§’åº¦
+    /// å®šæ•°
     /// </summary>
     public const float RIGHT_ANGLE = 90.0f;
 
     /// <summary>
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     public SpiralRotation() { }
 
     /// <summary>
-    /// State‚ÌÀsˆ—
+    /// Stateã®å®Ÿè¡Œå‡¦ç†
     /// </summary>
-    /// <param name="owner">ƒCƒ“ƒXƒ^ƒ“ƒX‚ÌŠ—LÒ</param>
+    /// <param name="owner">ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ‰€æœ‰è€…</param>
     public override void OnExecute(SpiralStar owner) 
     {
-        //GamePad‚Ì¶ƒXƒeƒBƒbƒN‚Ì“ü—Í‚ğæ“¾‚·‚é
+        //GamePadã®å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®å…¥åŠ›ã‚’å–å¾—ã™ã‚‹
         Vector2 move = owner.actions.Player.Move.ReadValue<Vector2>();
 
-        //•¨—ƒGƒ“ƒWƒ“‚ÌƒxƒNƒgƒ‹‚ğæ“¾
+        //ç‰©ç†ã‚¨ãƒ³ã‚¸ãƒ³ã®ãƒ™ã‚¯ãƒˆãƒ«ã‚’å–å¾—
         Vector2 vel = owner.rigidBody2D.velocity;
 
-        //ƒxƒNƒgƒ‹‚Ì’·‚³‚ªÅ¬’l‚æ‚è‘å‚«‚¢‚Æ‚«
+        //ãƒ™ã‚¯ãƒˆãƒ«ã®é•·ã•ãŒæœ€å°å€¤ã‚ˆã‚Šå¤§ãã„ã¨ã
         if (vel.magnitude > Movement.MIN_MOVE_LIMIT)
         {
-            //ƒxƒNƒgƒ‹‚ğ³‹K‰»
+            //ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ­£è¦åŒ–
             vel.Normalize();
 
-            //ƒxƒNƒgƒ‹‚ğ”½“]
+            //ãƒ™ã‚¯ãƒˆãƒ«ã‚’åè»¢
             vel *= -1;
 
-            //•¨—ƒGƒ“ƒWƒ“‚Å—Í‚ğ‰Á‚¦‚é
+            //ç‰©ç†ã‚¨ãƒ³ã‚¸ãƒ³ã§åŠ›ã‚’åŠ ãˆã‚‹
             owner.rigidBody2D.AddForce(vel * 3, ForceMode2D.Force);
         }
-        //ƒxƒNƒgƒ‹‚Ì’·‚³‚ªÅ¬’lˆÈ‰º‚Ì
+        //ãƒ™ã‚¯ãƒˆãƒ«ã®é•·ã•ãŒæœ€å°å€¤ä»¥ä¸‹ã®æ™‚
         else
         {
-            //ƒxƒNƒgƒ‹‚ğƒ[ƒ‚É‚·‚é
+            //ãƒ™ã‚¯ãƒˆãƒ«ã‚’ã‚¼ãƒ­ã«ã™ã‚‹
             owner.rigidBody2D.velocity = Vector2.zero;
         }
 
-        //GamePad‚ÌAƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚©‚Ç‚¤‚©
+        //GamePadã®Aãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸã‹ã©ã†ã‹
         if (owner.actions.Player.Atack.IsPressed())
         {
-            //SpiralStar‚ğ‰ñ“]‚³‚¹‚é
+            //SpiralStarã‚’å›è»¢ã•ã›ã‚‹
             owner.rotAngle += ROTSPEED;
 
-            //ƒQ[ƒW‚Ìƒ`ƒƒ[ƒW‚ğs‚¤
+            //ã‚²ãƒ¼ã‚¸ã®ãƒãƒ£ãƒ¼ã‚¸ã‚’è¡Œã†
             StarChaegeUI.Instance.OnCharge();
 
-            //–îˆó‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é
+            //çŸ¢å°ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
             OnArrowInstantiate(owner);
         }
 
-        //GamePad‚ÌAƒ{ƒ^ƒ“‚ª—£‚³‚ê‚½
+        //GamePadã®Aãƒœã‚¿ãƒ³ãŒé›¢ã•ã‚ŒãŸæ™‚
         if(owner.actions.Player.Atack.WasReleasedThisFrame())
         {
-            //ƒ`ƒƒ[ƒWUI‚©‚ç‰æ‘œ‚ğæ“¾
+            //ãƒãƒ£ãƒ¼ã‚¸UIã‹ã‚‰ç”»åƒã‚’å–å¾—
             Image image = StarChaegeUI.Instance.image;
 
-            //ƒ`ƒƒ[ƒW‚ÌAnimationCurve‚ğƒxƒNƒgƒ‹‚Ì”{—¦‚Éİ’è
+            //ãƒãƒ£ãƒ¼ã‚¸ã®AnimationCurveã‚’ãƒ™ã‚¯ãƒˆãƒ«ã®å€ç‡ã«è¨­å®š
             owner.spiralMove.Scalar = owner.curve.Evaluate(image.fillAmount);
 
-            //ƒL[‚Ì“ü—Íó‘Ô‚É‚æ‚Á‚ÄˆÚ“®•ûŒü‚ğ•Ï‚¦‚é
+            //ã‚­ãƒ¼ã®å…¥åŠ›çŠ¶æ…‹ã«ã‚ˆã£ã¦ç§»å‹•æ–¹å‘ã‚’å¤‰ãˆã‚‹
             owner.spiralMove.Direct = move == Vector2.zero ? Vector2.up : move;
 
-            //ƒQ[ƒW‚Ì‰Šú‰»‚ğs‚¤
+            //ã‚²ãƒ¼ã‚¸ã®åˆæœŸåŒ–ã‚’è¡Œã†
             StarChaegeUI.Instance.OnReset();
 
-            //State‚ğØ‚è‘Ö‚¦‚é
+            //Stateã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹
             owner.stateMachine.ChangeState(owner.spiralMove);
 
-            //ˆÈŒã‚Ìˆ—‚Í”ò‚Î‚·
+            //ä»¥å¾Œã®å‡¦ç†ã¯é£›ã°ã™
             return;
         }
 
-        //¶ƒXƒeƒBƒbƒN‚Ì“ü—Í‚ª‚ ‚Á‚½‚Æ‚«
+        //å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®å…¥åŠ›ãŒã‚ã£ãŸã¨ã
         if (owner.actions.Player.Move.IsPressed())
         {
-            //–îˆó‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é
+            //çŸ¢å°ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
             OnArrowInstantiate(owner);
 
-            //–îˆó‚ª¶¬‚³‚ê‚Ä‚¢‚éê‡
+            //çŸ¢å°ãŒç”Ÿæˆã•ã‚Œã¦ã„ã‚‹å ´åˆ
             if (owner.arrow)
             {
-                //–îˆó‚Ì‰ñ“]Šp“x‚ğ‹‚ß‚é
+                //çŸ¢å°ã®å›è»¢è§’åº¦ã‚’æ±‚ã‚ã‚‹
                 float radian = Mathf.Atan2(move.x, move.y) * Mathf.Rad2Deg;
 
-                //–îˆó‚ÌÀ•W‚ğÄİ’è‚·‚é
+                //çŸ¢å°ã®åº§æ¨™ã‚’å†è¨­å®šã™ã‚‹
                 owner.arrow.transform.position = new Vector3(move.x * 0.25f, move.y * 0.25f,0.0f) + 
                     new Vector3(owner.rigidBody2D.position.x, owner.rigidBody2D.position.y,0.0f);
                 
-                //Šp“x‚ğÄİ’è‚·‚é
+                //è§’åº¦ã‚’å†è¨­å®šã™ã‚‹
                 owner.arrow.transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, -radian));
             }
         }
 
-        //¶ƒXƒeƒBƒbƒN‚ª—£‚³‚ê‚½‚Æ‚«
+        //å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ãŒé›¢ã•ã‚ŒãŸã¨ã
         if (owner.actions.Player.Move.WasReleasedThisFrame())
         {
-            //–îˆó‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğíœ‚·‚é
+            //çŸ¢å°ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å‰Šé™¤ã™ã‚‹
             OnArrowRelease(owner);
         }
     }
 
     /// <summary>
-    /// State‚ÌŠJnˆ—
+    /// Stateã®é–‹å§‹å‡¦ç†
     /// </summary>
-    /// <param name="owner">ƒCƒ“ƒXƒ^ƒ“ƒX‚ÌŠ—LÒ</param>
-    /// <param name="preState">‘O‰ñ‚ÌƒXƒe[ƒg</param>
+    /// <param name="owner">ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ‰€æœ‰è€…</param>
+    /// <param name="preState">å‰å›ã®ã‚¹ãƒ†ãƒ¼ãƒˆ</param>
     public override void OnEnter(SpiralStar owner, StateBase<SpiralStar> preState) 
     {
-        //–îˆó‚Ì¶¬‚Ìƒtƒ‰ƒO‚ğØ‚é
+        //çŸ¢å°ã®ç”Ÿæˆã®ãƒ•ãƒ©ã‚°ã‚’åˆ‡ã‚‹
         m_fArrowCreate = false;
     }
 
     /// <summary>
-    /// State‚ªI—¹ˆ—
+    /// StateãŒçµ‚äº†å‡¦ç†
     /// </summary>
-    /// <param name="owner">ƒCƒ“ƒXƒ^ƒ“ƒX‚ÌŠ—LÒ</param>
-    /// <param name="nextState">Ÿ‚ÌState</param>
+    /// <param name="owner">ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ‰€æœ‰è€…</param>
+    /// <param name="nextState">æ¬¡ã®State</param>
     public override void OnExit(SpiralStar owner, StateBase<SpiralStar> nextState) 
     {
-        //–îˆó‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğíœ‚·‚é
+        //çŸ¢å°ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å‰Šé™¤ã™ã‚‹
         OnArrowRelease(owner);
     }
 
     /// <summary>
-    /// –îˆó‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é
+    /// çŸ¢å°ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
     /// </summary>
-    /// <param name="owner">ƒCƒ“ƒXƒ^ƒ“ƒX‚ÌŠ—LÒ</param>
+    /// <param name="owner">ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ‰€æœ‰è€…</param>
     public void OnArrowInstantiate(SpiralStar owner)
     {
-        //¶¬ƒtƒ‰ƒO‚ªfalse‚Ì‚Æ‚«
+        //ç”Ÿæˆãƒ•ãƒ©ã‚°ãŒfalseã®ã¨ã
         if (!m_fArrowCreate)
         {
-            //–îˆó‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é
+            //çŸ¢å°ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
             ArrowFactory.Instance.CreateArrow(owner, RELATIVEARROW);
 
-            //ƒtƒ‰ƒO‚ğ‹N‚±‚·
+            //ãƒ•ãƒ©ã‚°ã‚’èµ·ã“ã™
             m_fArrowCreate = true;
         }
     }
 
     /// <summary>
-    /// –îˆó‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğíœ‚·‚é
+    /// çŸ¢å°ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å‰Šé™¤ã™ã‚‹
     /// </summary>
-    /// <param name="owner">ƒCƒ“ƒXƒ^ƒ“ƒX‚ÌŠ—LÒ</param>
+    /// <param name="owner">ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ‰€æœ‰è€…</param>
     public void OnArrowRelease(SpiralStar owner)
     {
-        //¶¬ƒtƒ‰ƒO‚ªtrue‚Ì‚Æ‚«
+        //ç”Ÿæˆãƒ•ãƒ©ã‚°ãŒtrueã®ã¨ã
         if (m_fArrowCreate)
         {
-            //–îˆó‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğíœ‚·‚é
+            //çŸ¢å°ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å‰Šé™¤ã™ã‚‹
             ArrowFactory.Instance.ReleaseArrow(owner);
 
-            //ƒtƒ‰ƒO‚ğØ‚é
+            //ãƒ•ãƒ©ã‚°ã‚’åˆ‡ã‚‹
             m_fArrowCreate = false;
         }
     }

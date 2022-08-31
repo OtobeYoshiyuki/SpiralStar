@@ -1,96 +1,96 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// BlackStar‚ÌŠî’êƒNƒ‰ƒX
+/// BlackStarã®åŸºåº•ã‚¯ãƒ©ã‚¹
 /// </summary>
 public abstract class BlackStar : StarBase
 {
     /// <summary>
-    /// —LŒÀStateMachine
+    /// æœ‰é™StateMachine
     /// </summary>
     protected StateMachine<BlackStar> m_stateMachine = null;
 
     /// <summary>
-    /// BlackStar‚Ì‰ñ“]‚ÌState
+    /// BlackStarã®å›è»¢ã®State
     /// </summary>
     protected BlackRotation m_rotateState = null;
 
     /// <summary>
-    /// BlackStar‚ÌˆÚ“®‚ÌState
+    /// BlackStarã®ç§»å‹•ã®State
     /// </summary>
     protected BlackMove m_moveState = null;
 
     /// <summary>
-    /// BlackStar‚ÌÕ“Ë‚ÌState
+    /// BlackStarã®è¡çªæ™‚ã®State
     /// </summary>
     protected BlackCollision m_collisionState = null;
 
     /// <summary>
-    /// Player‚Ì‘€ì‚·‚éStar‚ÉƒAƒNƒZƒX‚·‚é‚½‚ß‚ÌƒNƒ‰ƒX
+    /// Playerã®æ“ä½œã™ã‚‹Starã«ã‚¢ã‚¯ã‚»ã‚¹ã™ã‚‹ãŸã‚ã®ã‚¯ãƒ©ã‚¹
     /// </summary>
     private SpiralStar m_playerStar = null;
 
     /// <summary>
-    /// ƒLƒƒƒ‰‚ğ¯•Ê‚·‚é‚½‚ß‚ÌID
+    /// ã‚­ãƒ£ãƒ©ã‚’è­˜åˆ¥ã™ã‚‹ãŸã‚ã®ID
     /// </summary>
     private int m_id = 0;
 
     /// <summary>
-    /// GameObject‚Éİ’è‚³‚ê‚Ä‚¢‚éƒ^ƒO
+    /// GameObjectã«è¨­å®šã•ã‚Œã¦ã„ã‚‹ã‚¿ã‚°
     /// </summary>
     public const string BLACKSTAR_TAG = "BlackStar";
 
-    //UŒ‚‚ğó‚¯‚½‚Æ‚«‚ÌƒŒƒCƒ„[
+    //æ”»æ’ƒã‚’å—ã‘ãŸã¨ãã®ãƒ¬ã‚¤ãƒ¤ãƒ¼
     public const int COLLISION_LAYER = 7;
 
-    //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    //ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     protected BlackStar() : base()
     {
 
     }
 
     /// <summary>
-    /// ¯‚Ì‹¤’Ê‚Ìˆ—‚ğŒÄ‚Ô
+    /// æ˜Ÿã®å…±é€šã®å‡¦ç†ã‚’å‘¼ã¶
     /// </summary>
-    //‰Šú‰»
+    //åˆæœŸåŒ–
     public override void StarInit()
     {
-        //Šî’êƒNƒ‰ƒX‚Ìˆ—‚ğŒÄ‚Ô
+        //åŸºåº•ã‚¯ãƒ©ã‚¹ã®å‡¦ç†ã‚’å‘¼ã¶
         base.StarInit();
     }
 
-    //XVˆ—
+    //æ›´æ–°å‡¦ç†
     public override void StarUpdate()
     {
-        //Šî’êƒNƒ‰ƒX‚Ìˆ—‚ğŒÄ‚Ô
+        //åŸºåº•ã‚¯ãƒ©ã‚¹ã®å‡¦ç†ã‚’å‘¼ã¶
         base.StarUpdate();
 
-        //€–S‚µ‚½‚Æ‚«
+        //æ­»äº¡ã—ãŸã¨ã
         if(deth)
         {
-            //ƒXƒe[ƒg‚ğ•ÏX‚·‚é
+            //ã‚¹ãƒ†ãƒ¼ãƒˆã‚’å¤‰æ›´ã™ã‚‹
             m_stateMachine.ChangeState(blackCollision);
 
-            //ƒŒƒCƒ„[‚ğ•ÏX‚·‚é
+            //ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’å¤‰æ›´ã™ã‚‹
             gameObject.layer = COLLISION_LAYER;
 
-            //ƒtƒ‰ƒO‚ğ—‚Æ‚·
+            //ãƒ•ãƒ©ã‚°ã‚’è½ã¨ã™
             deth = false;
         }
     }
 
-    //I—¹ˆ—
+    //çµ‚äº†å‡¦ç†
     public override void StarFinal()
     {
-        //Šî’êƒNƒ‰ƒX‚Ìˆ—‚ğŒÄ‚Ô
+        //åŸºåº•ã‚¯ãƒ©ã‚¹ã®å‡¦ç†ã‚’å‘¼ã¶
         base.StarFinal();
     }
 
     /// <summary>
     /// StateMachine
-    /// ƒQƒbƒ^[@
+    /// ã‚²ãƒƒã‚¿ãƒ¼ã€€
     /// </summary>
     public StateMachine<BlackStar> stateMachine
     {
@@ -98,8 +98,8 @@ public abstract class BlackStar : StarBase
     }
 
     /// <summary>
-    /// BlackStar‚Ì‰ñ“]—p‚ÌState
-    /// ƒQƒbƒ^[
+    /// BlackStarã®å›è»¢ç”¨ã®State
+    /// ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     public BlackRotation blackRotation
     {
@@ -107,8 +107,8 @@ public abstract class BlackStar : StarBase
     }
 
     /// <summary>
-    /// BlackStar‚ÌˆÚ“®—p‚ÌState
-    /// ƒQƒbƒ^[
+    /// BlackStarã®ç§»å‹•ç”¨ã®State
+    /// ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     public BlackMove blackMove
     {
@@ -116,8 +116,8 @@ public abstract class BlackStar : StarBase
     }
 
     /// <summary>
-    /// BlackStar‚ÌÕ“Ë—p‚ÌState
-    /// ƒQƒbƒ^[
+    /// BlackStarã®è¡çªç”¨ã®State
+    /// ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     public BlackCollision blackCollision
     {
@@ -125,8 +125,8 @@ public abstract class BlackStar : StarBase
     }
 
     /// <summary>
-    /// SpiralStariPlayer‚ª‘€ì‚µ‚Ä‚¢‚éj
-    /// ƒQƒbƒ^[@ƒZƒbƒ^[
+    /// SpiralStarï¼ˆPlayerãŒæ“ä½œã—ã¦ã„ã‚‹ï¼‰
+    /// ã‚²ãƒƒã‚¿ãƒ¼ã€€ã‚»ãƒƒã‚¿ãƒ¼
     /// </summary>
     public SpiralStar starPlayer
     {
@@ -135,8 +135,8 @@ public abstract class BlackStar : StarBase
     }
 
     /// <summary>
-    /// idi¯•Ê”Ô†j
-    /// ƒQƒbƒ^[@ƒZƒbƒ^[
+    /// idï¼ˆè­˜åˆ¥ç•ªå·ï¼‰
+    /// ã‚²ãƒƒã‚¿ãƒ¼ã€€ã‚»ãƒƒã‚¿ãƒ¼
     /// </summary>
     public int id
     {
