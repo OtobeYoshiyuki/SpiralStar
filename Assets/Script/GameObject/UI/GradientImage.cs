@@ -28,6 +28,8 @@ public class GradientImage : BaseMeshEffect
     }
     protected void CreateGradientMesh()
     {
+        if (_vertexList.Count == 0) return;
+
         _axisIndex = (int)_axis;
         _minMax = new Vector2(
             _vertexList.Select(v => v.position[_axisIndex]).Min(),
