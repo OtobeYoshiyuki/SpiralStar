@@ -1,51 +1,51 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ƒXƒe[ƒ^ƒX‚ÌŠÇ—ƒNƒ‰ƒX
+/// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®ç®¡ç†ã‚¯ãƒ©ã‚¹
 /// </summary>
 [System.Serializable]
 public class StatusManager : Singleton<StatusManager>
 {
     /// <summary>
-    /// ƒXƒe[ƒ^ƒX‚Ìƒf[ƒ^ƒx[ƒX
-    /// Inspecter‚©‚ç•ÒW‚Å‚«‚é‚æ‚¤‚É‚·‚é
+    /// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹
+    /// Inspecterã‹ã‚‰ç·¨é›†ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
     /// </summary>
     [SerializeField]
     private StatusDataBase m_dataBase = new StatusDataBase();
 
     /// <summary>
-    /// ƒXƒe[ƒ^ƒX‚ÌƒŠƒXƒg
-    /// ƒQ[ƒ€’†‚É’l‚ª•Ï“®‚·‚é‚à‚Ì‚Ì‚İİ’è‚·‚é
-    /// Inspecter‚©‚ç•ÒW‚Å‚«‚é‚æ‚¤‚É‚·‚é
+    /// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®ãƒªã‚¹ãƒˆ
+    /// ã‚²ãƒ¼ãƒ ä¸­ã«å€¤ãŒå¤‰å‹•ã™ã‚‹ã‚‚ã®ã®ã¿è¨­å®šã™ã‚‹
+    /// Inspecterã‹ã‚‰ç·¨é›†ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
     /// </summary>
     [SerializeField]
     private List<StarStatus> m_statusList = new List<StarStatus>();
 
     /// <summary>
-    /// ƒXƒ^[‚²‚Æ‚ÌƒXƒe[ƒ^ƒX‚Ì˜A‘z”z—ñ
-    /// ƒQ[ƒ€’†‚É’l‚ª•Ï“®‚·‚é‚à‚Ì‚Ì‚İİ’è
+    /// ã‚¹ã‚¿ãƒ¼ã”ã¨ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®é€£æƒ³é…åˆ—
+    /// ã‚²ãƒ¼ãƒ ä¸­ã«å€¤ãŒå¤‰å‹•ã™ã‚‹ã‚‚ã®ã®ã¿è¨­å®š
     /// </summary>
     private Dictionary<string, List<StatusInfo>> m_starStatusList = new Dictionary<string, List<StatusInfo>>();
 
     /// <summary>
-    /// ‰Šú‰»ˆ—
+    /// åˆæœŸåŒ–å‡¦ç†
     /// </summary>
     protected override void Init()
     {
-        //ƒf[ƒ^ƒx[ƒX‚Ì‰Šú‰»‚ğs‚¤
+        //ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã®åˆæœŸåŒ–ã‚’è¡Œã†
         m_dataBase.InitDataBase();
 
         foreach(StarStatus status in m_statusList)
         {
-            //Inspecter‚Åİ’è‚µ‚½ƒXƒe[ƒ^ƒX‚ğ˜A‘z”z—ñ‚É“o˜^‚·‚é
+            //Inspecterã§è¨­å®šã—ãŸã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’é€£æƒ³é…åˆ—ã«ç™»éŒ²ã™ã‚‹
             m_starStatusList.Add(status.owner, status.statusList);
         }
     }
 
     /// <summary>
-    /// ”pŠüˆ—
+    /// å»ƒæ£„å‡¦ç†
     /// </summary>
     protected override void Release()
     {
@@ -53,41 +53,41 @@ public class StatusManager : Singleton<StatusManager>
 
     public void OnDamageStatus(StatusController self,StatusController other)
     {
-        //ƒ_ƒ[ƒWŒvZ‚ğs‚¤
+        //ãƒ€ãƒ¡ãƒ¼ã‚¸è¨ˆç®—ã‚’è¡Œã†
         float newHP = CaclHpStatus(
-            self.GetTargetStatus(StarBase.HP),//©g‚ÌHP‚ğ‘æ1ˆø”‚Éİ’è
-            other.GetTargetStatus(StarBase.ATACK),//‘Šè‚ÌUŒ‚—Í‚ğ‘æ2ˆø”‚É
-            dataBase.MaxStatus(StarBase.DEFENCE)//‘Šè‚Ìç”õ—Í‚ğ‘æ3ˆø”‚É
+            self.GetTargetStatus(StarBase.HP),//è‡ªèº«ã®HPã‚’ç¬¬1å¼•æ•°ã«è¨­å®š
+            other.GetTargetStatus(StarBase.ATACK),//ç›¸æ‰‹ã®æ”»æ’ƒåŠ›ã‚’ç¬¬2å¼•æ•°ã«
+            dataBase.MaxStatus(StarBase.DEFENCE)//ç›¸æ‰‹ã®å®ˆå‚™åŠ›ã‚’ç¬¬3å¼•æ•°ã«
             );
 
-        //V‚½‚ÈHP‚ğÄİ’è‚·‚é
+        //æ–°ãŸãªHPã‚’å†è¨­å®šã™ã‚‹
         self.SetTargetStatus(StarBase.HP, newHP);
 
     }
 
     /// <summary>
-    /// ƒXƒe[ƒ^ƒX‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
+    /// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
     /// </summary>
-    /// <param name="hp">‘Ì—Í</param>
-    /// <param name="atack">UŒ‚—Í</param>
-    /// <param name="defence">–hŒä—Í</param>
-    /// <returns>V‚½‚È‘Ì—Í</returns>
+    /// <param name="hp">ä½“åŠ›</param>
+    /// <param name="atack">æ”»æ’ƒåŠ›</param>
+    /// <param name="defence">é˜²å¾¡åŠ›</param>
+    /// <returns>æ–°ãŸãªä½“åŠ›</returns>
     public float CaclHpStatus(float hp,float atack,float defence)
     {
-        //ƒpƒ‰ƒ[ƒ^[‚©‚çV‚½‚ÈHP‚ğZo‚·‚é
+        //ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼ã‹ã‚‰æ–°ãŸãªHPã‚’ç®—å‡ºã™ã‚‹
         return hp - (atack - defence);
     }
 
     /// <summary>
-    /// ƒXƒe[ƒ^ƒX—p‚Ìƒf[ƒ^ƒx[ƒX‚ğæ“¾
-    /// ƒQƒbƒ^[
+    /// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ç”¨ã®ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã‚’å–å¾—
+    /// ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     public StatusDataBase dataBase { get { return m_dataBase; } }
 
     /// <summary>
-    /// ƒXƒe[ƒ^ƒX‚Ì”z—ñ‚ğæ“¾‚·‚é
+    /// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®é…åˆ—ã‚’å–å¾—ã™ã‚‹
     /// </summary>
-    /// <param name="key">ƒXƒe[ƒ^ƒX‚ÌŠ—LÒ‚Ìƒ^ƒO</param>
-    /// <returns>ŠY“–‚·‚éƒXƒe[ƒ^ƒX‚Ì”z—ñ</returns>
+    /// <param name="key">ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®æ‰€æœ‰è€…ã®ã‚¿ã‚°</param>
+    /// <returns>è©²å½“ã™ã‚‹ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®é…åˆ—</returns>
     public List<StatusInfo> GetStatusInfoArray(string key) { return m_starStatusList[key]; }
 }

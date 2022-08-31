@@ -1,94 +1,94 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ƒQ[ƒW‚ÌŠÇ—ƒNƒ‰ƒX
+/// ã‚²ãƒ¼ã‚¸ã®ç®¡ç†ã‚¯ãƒ©ã‚¹
 /// </summary>
 public class GageManager
 {
     /// <summary>
-    /// ƒAƒjƒ[ƒVƒ‡ƒ“‚ªÀs’†‚©‚Ç‚¤‚©
+    /// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãŒå®Ÿè¡Œä¸­ã‹ã©ã†ã‹
     /// </summary>
     private bool m_isAnimation = false;
 
     /// <summary>
-    /// ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌŒv‘ªŠÔ
+    /// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®è¨ˆæ¸¬æ™‚é–“
     /// </summary>
     private float m_animeTime = 0.0f;
 
     /// <summary>
-    /// ƒ^ƒCƒ€ƒXƒP[ƒ‹
+    /// ã‚¿ã‚¤ãƒ ã‚¹ã‚±ãƒ¼ãƒ«
     /// </summary>
     private float m_timeScale = 1.0f;
 
     /// <summary>
-    /// ƒQ[ƒW‚ÌƒAƒjƒ[ƒVƒ‡ƒ“‚ÌƒŠƒXƒg
+    /// ã‚²ãƒ¼ã‚¸ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®ãƒªã‚¹ãƒˆ
     /// </summary>
     private List<GageAnimation> m_animationList = new List<GageAnimation>();
 
     /// <summary>
-    /// ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌŠÇ—ƒNƒ‰ƒX‚Ì‰Šú‰»
+    /// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®ç®¡ç†ã‚¯ãƒ©ã‚¹ã®åˆæœŸåŒ–
     /// </summary>
     public void InitGageManager()
     {
-        //ƒAƒjƒ[ƒVƒ‡ƒ“ƒtƒ‰ƒO‚ğ—‚Æ‚·
+        //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãƒ•ãƒ©ã‚°ã‚’è½ã¨ã™
         m_isAnimation = false;
 
-        //ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌŒv‘ªŠÔ‚ğ‰Šú‰»‚·‚é
+        //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®è¨ˆæ¸¬æ™‚é–“ã‚’åˆæœŸåŒ–ã™ã‚‹
         m_animeTime = 0.0f;
     }
 
     /// <summary>
-    /// ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌŠÇ—ƒNƒ‰ƒX‚ÌXVˆ—
+    /// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®ç®¡ç†ã‚¯ãƒ©ã‚¹ã®æ›´æ–°å‡¦ç†
     /// </summary>
     public void UpdateGageManager()
     {
-        //ƒAƒjƒ[ƒVƒ‡ƒ“ƒtƒ‰ƒO‚ª—‚¿‚Ä‚¢‚é‚Æ‚«‚Í‰½‚à‚µ‚È‚¢
+        //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãƒ•ãƒ©ã‚°ãŒè½ã¡ã¦ã„ã‚‹ã¨ãã¯ä½•ã‚‚ã—ãªã„
         if (!m_isAnimation) return;
 
-        //ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌI—¹‚ğƒJƒEƒ“ƒg‚·‚é•Ï”‚ğéŒ¾‚·‚é
+        //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®çµ‚äº†ã‚’ã‚«ã‚¦ãƒ³ãƒˆã™ã‚‹å¤‰æ•°ã‚’å®£è¨€ã™ã‚‹
         int animeFinish = 0;
 
         foreach(GageAnimation animation in m_animationList)
         {
-            //ƒAƒjƒ[ƒVƒ‡ƒ“‚ªI—¹‚µ‚½‚©Šm”F‚·‚é
+            //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãŒçµ‚äº†ã—ãŸã‹ç¢ºèªã™ã‚‹
             bool result = animation.UpdateGage(this);
 
-            //I—¹‚µ‚Ä‚¢‚½‚çAƒJƒEƒ“ƒg‚ğXV‚·‚é
+            //çµ‚äº†ã—ã¦ã„ãŸã‚‰ã€ã‚«ã‚¦ãƒ³ãƒˆã‚’æ›´æ–°ã™ã‚‹
             if (result) animeFinish++;
 
-            //ƒAƒjƒ[ƒVƒ‡ƒ“‚ª‚·‚×‚ÄI—¹‚µ‚½‚ç
+            //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãŒã™ã¹ã¦çµ‚äº†ã—ãŸã‚‰
             if(animeFinish >= m_animationList.Count)
             {
-                //ƒtƒ‰ƒO‚Æƒ^ƒCƒ}[‚ÌXV‚ğs‚¤
+                //ãƒ•ãƒ©ã‚°ã¨ã‚¿ã‚¤ãƒãƒ¼ã®æ›´æ–°ã‚’è¡Œã†
                 InitGageManager();
             }
-            //ƒAƒjƒ[ƒVƒ‡ƒ“‚ªI‚í‚Á‚Ä‚È‚¯‚ê‚Î
+            //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãŒçµ‚ã‚ã£ã¦ãªã‘ã‚Œã°
             else
             {
-                //ƒAƒjƒ[ƒVƒ‡ƒ“ŠÔ‚ÌXV‚ğs‚¤
+                //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³æ™‚é–“ã®æ›´æ–°ã‚’è¡Œã†
                 m_animeTime += Time.deltaTime * m_timeScale;
             }
         }
     }
 
     /// <summary>
-    /// ‘ÎÛ‚ÌƒAƒjƒ[ƒVƒ‡ƒ“ƒQ[ƒW‚ğæ“¾‚·‚é
+    /// å¯¾è±¡ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚²ãƒ¼ã‚¸ã‚’å–å¾—ã™ã‚‹
     /// </summary>
-    /// <param name="index">‘ÎÛ‚ÌƒCƒ“ƒfƒbƒNƒX</param>
-    /// <returns>‘ÎÛ‚ÌƒAƒjƒ[ƒVƒ‡ƒ“ƒQ[ƒW</returns>
+    /// <param name="index">å¯¾è±¡ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹</param>
+    /// <returns>å¯¾è±¡ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚²ãƒ¼ã‚¸</returns>
     public GageAnimation GetGageAnimation(int index) { return m_animationList[index]; }
 
     /// <summary>
-    /// ”z—ñ‚ÉƒAƒjƒ[ƒVƒ‡ƒ“‚ğ’Ç‰Á‚·‚é
+    /// é…åˆ—ã«ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’è¿½åŠ ã™ã‚‹
     /// </summary>
-    /// <param name="gage">’Ç‰Á‚·‚éƒQ[ƒW</param>
+    /// <param name="gage">è¿½åŠ ã™ã‚‹ã‚²ãƒ¼ã‚¸</param>
     public void AddGage(GageAnimation gage) { m_animationList.Add(gage); }
 
     /// <summary>
-    /// ƒAƒjƒ[ƒVƒ‡ƒ“‚ªÀs’†‚©Šm”F‚·‚éƒtƒ‰ƒO
-    /// ƒQƒbƒ^[@ƒZƒbƒ^[
+    /// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãŒå®Ÿè¡Œä¸­ã‹ç¢ºèªã™ã‚‹ãƒ•ãƒ©ã‚°
+    /// ã‚²ãƒƒã‚¿ãƒ¼ã€€ã‚»ãƒƒã‚¿ãƒ¼
     /// </summary>
     public bool isAnimation 
     { 
@@ -97,8 +97,8 @@ public class GageManager
     }
 
     /// <summary>
-    /// ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌŒv‘ªŠÔ
-    /// ƒQƒbƒ^[@ƒZƒbƒ^[
+    /// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®è¨ˆæ¸¬æ™‚é–“
+    /// ã‚²ãƒƒã‚¿ãƒ¼ã€€ã‚»ãƒƒã‚¿ãƒ¼
     /// </summary>
     public float animeTime 
     { 
@@ -107,8 +107,8 @@ public class GageManager
     }
 
     /// <summary>
-    /// ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌXV‘¬“x‚ÌƒXƒJƒ‰
-    /// ƒQƒbƒ^[@ƒZƒbƒ^[
+    /// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®æ›´æ–°é€Ÿåº¦ã®ã‚¹ã‚«ãƒ©
+    /// ã‚²ãƒƒã‚¿ãƒ¼ã€€ã‚»ãƒƒã‚¿ãƒ¼
     /// </summary>
     public float timeScale
     {

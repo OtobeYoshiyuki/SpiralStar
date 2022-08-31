@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StarManager : Singleton<StarManager>
+public class ScoreManager : Singleton<ScoreManager>
 {
     // Start is called before the first frame update
     void Start()
@@ -29,5 +29,4 @@ public class StarManager : Singleton<StarManager>
     protected override void Release()
     {
     }
-
 }
