@@ -33,11 +33,6 @@ public abstract class BlackStar : StarBase
     private SpiralStar m_playerStar = null;
 
     /// <summary>
-    /// キャラを識別するためのID
-    /// </summary>
-    private int m_id = 0;
-
-    /// <summary>
     /// GameObjectに設定されているタグ
     /// </summary>
     public const string BLACKSTAR_TAG = "BlackStar";
@@ -122,25 +117,5 @@ public abstract class BlackStar : StarBase
     public BlackCollision blackCollision
     {
         get { return m_collisionState; }
-    }
-
-    /// <summary>
-    /// SpiralStar（Playerが操作している）
-    /// ゲッター　セッター
-    /// </summary>
-    public SpiralStar starPlayer
-    {
-        get { return m_playerStar; }
-        set { m_playerStar = value; }
-    }
-
-    /// <summary>
-    /// id（識別番号）
-    /// ゲッター　セッター
-    /// </summary>
-    public int id
-    {
-        get { return m_id; }
-        set { m_id = value; }
     }
 }

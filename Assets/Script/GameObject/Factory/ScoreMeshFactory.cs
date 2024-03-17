@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class ScoreMeshFactory : Singleton<EffectFactory>
+public class ScoreMeshFactory : Singleton<ScoreMeshFactory>
 {
     /// <summary>
     /// スコアのメッシュオブジェクト

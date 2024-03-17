@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EffectFactory : Singleton<EffectFactory>
+public class StarEffectFactory : Singleton<StarEffectFactory>
 {
     [SerializeField]
     private ParticleSystem m_starEffect = null;

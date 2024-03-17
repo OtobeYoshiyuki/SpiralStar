@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 /// <summary>
 /// BlackStarを生成する工場
@@ -15,23 +16,16 @@ public class BlackStarFactory : Singleton<BlackStarFactory>
     private GameObject m_starPrefab = null;
 
     /// <summary>
-    /// 生成する座標を指定する
+    /// 敵の情報
     /// Inspecterから編集できるようにする
     /// </summary>
     [SerializeField]
-    private List<Vector3> m_spawnLocations = null;
+    private List<EnemyStarData> m_enemyDatas = null;
 
     /// <summary>
-    /// 画像の色を指定する
-    /// Inspecterから編集できるようにする
+    /// やられた敵のIDを保有する配列
     /// </summary>
-    [SerializeField]
-    private List<Color> m_spriteColors = null;
-
-    /// <summary>
-    /// 敵のインスタンス
-    /// </summary>
-    private List<GameObject> m_enemyStars = null;
+    private List<int> m_beKill_Ids = null;
 
     /// <summary>
     /// 敵の数
@@ -56,8 +50,14 @@ public class BlackStarFactory : Singleton<BlackStarFactory>
     /// </summary>
     protected override void Init()
     {
-        //GameObjectのインスタンスを保持留守ためのListを生成
-        m_enemyStars = new List<GameObject>();
+        //やられた敵のIDを保有するListを作成
+        m_beKill_Ids = new List<int>();
+
+        for(int i = 0; i < MAX_NUM;i++)
+        {
+            //生成のための情報を一時的に追加する
+            m_beKill_Ids.Add(i);
+        }
     }
 
     /// <summary>
@@ -71,25 +71,36 @@ public class BlackStarFactory : Singleton<BlackStarFactory>
     /// <summary>
     /// 敵GameObjectを生成
     /// </summary>
-    /// <param name="star">PlayerのStar</param>
     /// <param name="num">生成する数</param>
-    public void CreateBlackStar(SpiralStar star,in int kinds)
+    public void CreateBlackStar(in int kinds)
     {
-        //敵GameObjectを生成
-        GameObject enemyStar = Instantiate(m_starPrefab, m_spawnLocations[kinds], Quaternion.identity);
+        //StarManagerを取得する
+        StarManager starManager = StarManager.Instance;
 
-        //基底クラスにPlayerクラスのインスタンスを登録
-        enemyStar.GetComponent<BalanStar>().starPlayer = star;
+        //敵の情報を取得する(先頭から順に取得する)
+        EnemyStarData enemyStarData = m_enemyDatas[m_beKill_Ids[0]];
+
+        //敵GameObjectを生成
+        GameObject enemyStar = Instantiate(m_starPrefab, enemyStarData.location, Quaternion.identity);
+
+        //スクリプトを宣言する
+        BlackStar blackStar = enemyStar.GetComponent<BalanStar>();
+
+        //SpriteRendererを取得する
+        SpriteRenderer sprite = enemyStar.GetComponent<SpriteRenderer>();
 
         //識別するIDを登録する
-        enemyStar.GetComponent<BalanStar>().id = kinds;
+        blackStar.id = kinds;
 
         //画像の色を設定する
-        enemyStar.GetComponent<SpriteRenderer>().color = m_spriteColors[kinds];
+        sprite.color = enemyStarData.color;
 
         //敵をListに追加
-        m_enemyStars.Add(enemyStar);
+        starManager.GetEmemyList().Add(blackStar);
+        starManager.GetStarList().Add(blackStar);
 
+        //敵の情報を削除する
+        m_beKill_Ids.RemoveAt(0);
     }
 
     /// <summary>
@@ -98,19 +109,40 @@ public class BlackStarFactory : Singleton<BlackStarFactory>
     /// <param name="id">識別番号</param>
     public void ReleaseBlackStar(in int id)
     {
-        for (int i = 0;i < m_enemyStars.Count;i++)
+        //StarManagerを取得する
+        StarManager starManager = StarManager.Instance;
+
+        //指定したIDのオブジェクトの解放
+        ReleaseStar(id, starManager.GetEmemyList());
+
+        //指定したIDのオブジェクトの解放
+        ReleaseStar(id, starManager.GetStarList());
+
+        //削除したIDを追加する
+        m_beKill_Ids.Add(id);
+    }
+
+    /// <summary>
+    /// 合致するIDを持つGameObjectを削除する
+    /// </summary>
+    /// <typeparam name="starT">StarBaseを継承した型でなければならない</typeparam>
+    /// <param name="id">対象の識別番号</param>
+    /// <param name="stars">対象の配列</param>
+    public void ReleaseStar<starT>(in int id, List<starT> stars) where starT : StarBase
+    {
+        for (int i = 0; i < stars.Count; i++)
         {
             //派生クラスのスクリプトを取得する
-            BalanStar balanStar = m_enemyStars[i].GetComponent<BalanStar>();
+            StarBase star = stars[i];
 
             //同じIDのGameObjectが見つかったら
-            if(balanStar.id == id)
+            if (star.id == id)
             {
                 //オブジェクトを消去する
-                Destroy(m_enemyStars[i]);
+                Destroy(star.gameObject);
 
                 //配列の要素を消す
-                m_enemyStars.RemoveAt(i);
+                stars.RemoveAt(i);
 
                 //一度消したら、ほかの処理は飛ばす
                 return;
@@ -118,3 +150,5 @@ public class BlackStarFactory : Singleton<BlackStarFactory>
         }
     }
 }
+
+
