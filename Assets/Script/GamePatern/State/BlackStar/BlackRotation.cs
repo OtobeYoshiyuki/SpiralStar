@@ -30,6 +30,9 @@ public class BlackRotation : StateBase<BlackStar>
     /// <param name="owner">インスタンスの所有者</param>
     public override void OnExecute(BlackStar owner) 
     {
+        //StarManagerを取得する
+        StarManager starManager = StarManager.Instance;
+
         //物理エンジンのベクトルを取得
         Vector2 vel = owner.rigidBody2D.velocity;
 
@@ -46,7 +49,7 @@ public class BlackRotation : StateBase<BlackStar>
             owner.rigidBody2D.AddForce(vel, ForceMode2D.Force);
 
             //相手と自分の角度の差を取得する
-            m_angleDef = -Utility.Atan2DegAngle(owner.rigidBody2D.position, owner.starPlayer.rigidBody2D.position);
+            m_angleDef = -Utility.Atan2DegAngle(owner.rigidBody2D.position, starManager.playerStar.rigidBody2D.position);
         }
         //ベクトルの長さが最小値以下の時
         else
@@ -85,6 +88,9 @@ public class BlackRotation : StateBase<BlackStar>
     /// <param name="preState">前回のステート</param>
     public override void OnEnter(BlackStar owner, StateBase<BlackStar> preState) 
     {
+        //StarManagerを取得する
+        StarManager starManager = StarManager.Instance;
+
         //時間を初期化する
         owner.time = 0.0f;
 
@@ -92,7 +98,7 @@ public class BlackRotation : StateBase<BlackStar>
         m_firstAngle = owner.rotAngle.z;
 
         //相手と自分の角度の差を取得する
-        m_angleDef = -Utility.Atan2DegAngle(owner.rigidBody2D.position, owner.starPlayer.rigidBody2D.position);
+        m_angleDef = -Utility.Atan2DegAngle(owner.rigidBody2D.position, starManager.playerStar.rigidBody2D.position);
     }
 
     /// <summary>

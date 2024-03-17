@@ -19,7 +19,7 @@ public class BlackCollision : StateBase<BlackStar>
         BlackStarFactory blackStarFactory = BlackStarFactory.Instance;
 
         //StarEffectのFactoryを取得する
-        EffectFactory effectFactory = EffectFactory.Instance;
+        StarEffectFactory StarEffectFactory = StarEffectFactory.Instance;
 
         //物理エンジンのベクトルを取得
         Vector2 vel = owner.rigidBody2D.velocity;
@@ -50,7 +50,7 @@ public class BlackCollision : StateBase<BlackStar>
 
 #pragma warning disable CS0612 // 型またはメンバーが旧型式です
             //Effectを生成する
-            effectFactory.SpawnStarEffect(owner);
+            StarEffectFactory.SpawnStarEffect(owner);
 #pragma warning restore CS0612 // 型またはメンバーが旧型式です
         }
 

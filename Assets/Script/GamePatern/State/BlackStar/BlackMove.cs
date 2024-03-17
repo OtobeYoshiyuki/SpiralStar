@@ -26,6 +26,9 @@ public class BlackMove : StateBase<BlackStar>
     /// <param name="owner">インスタンスの所有者</param>
     public override void OnExecute(BlackStar owner) 
     {
+        //StarManagerを取得する
+        StarManager starManager = StarManager.Instance;
+
         //物理エンジンのベクトルを取得
         Vector2 vel = owner.rigidBody2D.velocity;
 
@@ -55,7 +58,7 @@ public class BlackMove : StateBase<BlackStar>
         //SpiralStarとの距離が一定以上離れていれば
         if(owner.time >= CHANGE_STATE ||
             Utility.VectorLength(owner.rigidBody2D.position,
-            owner.starPlayer.rigidBody2D.position) >= 1.0f)
+            starManager.playerStar.rigidBody2D.position) >= 1.0f)
         {
             //Stateを切り替える
             owner.stateMachine.ChangeState(owner.blackRotation);

@@ -99,6 +99,9 @@ public class SpiralStar : StarBase
     // Start is called before the first frame update
     void Start()
     {
+        //IDを設定する
+        id = 0;
+
         //SpriteRendererを取得する
         SpriteRenderer sprite = GetComponent<SpriteRenderer>();
 
@@ -108,10 +111,10 @@ public class SpiralStar : StarBase
         //有限StateMachineのインスタンスを生成
         m_stateMachine = new StateMachine<SpiralStar>(this, m_spiralRotation);
 
-        for (int i = 0; i < BlackStarFactory.MAX_NUM; i++)
+        for (int i = 1; i <= BlackStarFactory.MAX_NUM; i++)
         {
             //敵のStarのインスタンスを生成
-            BlackStarFactory.Instance.CreateBlackStar(this, i);
+            BlackStarFactory.Instance.CreateBlackStar(i);
         }
 
         //イベント関数を登録する
@@ -129,9 +132,6 @@ public class SpiralStar : StarBase
 
         //星の更新処理
         StarUpdate();
-
-        GameData.AddFloat(gameObject.tag + "X", m_rigidBody2D.position.x);
-        GameData.AddFloat(gameObject.tag + "Y", m_rigidBody2D.position.y);
 
         //GamePadのAボタンが押されたら
         if (m_myAction.Player.Atack.WasPressedThisFrame())
@@ -164,6 +164,66 @@ public class SpiralStar : StarBase
 
         //StateMachineの更新処理
         m_stateMachine.UpdateState();
+    }
+
+    /// <summary>
+    /// 当たった瞬間を検知する
+    /// </summary>
+    /// <param name="collision">当たったオブジェクトの情報</param>
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //BlackStarに衝突した場合
+        if(collision.gameObject.tag == BlackStar.BLACKSTAR_TAG)
+        {
+            //StarChargeUIを取得する
+            StarChaegeUI starChaegeUI = StarChaegeUI.Instance;
+
+            //StatusManagerを取得する
+            StatusManager statusManager = StatusManager.Instance;
+
+           //アタッチされているスクリプトを取得する
+            BlackStar blackStar = collision.gameObject.GetComponent<BalanStar>();
+
+            //自身が攻撃中の時(チャージ中の時は起動しない)
+            if (m_stateMachine.currentState == m_spiralMove)
+            {
+                //自身のパワーが規定値以上の場合
+                if (starChaegeUI.power >= DAMAGE_MIN_POWER)
+                {
+                    //敵を倒す
+                    blackStar.deth = true;
+                }
+                //パワーが足りないとき
+                else
+                {
+                    //ダメージを受けていないとき
+                    if (!m_blink.blink)
+                    {
+                        //自分がダメージを受ける
+                        damage = true;
+
+                        //ダメージ計算を行う
+                       statusManager.OnDamageStatus(statusCs, blackStar.statusCs);
+                    }
+                }
+            }
+            else
+            {
+                //自身がチャージ中の時
+                if (m_stateMachine.currentState == m_spiralRotation)
+                {
+                    //ダメージを受けていないとき
+                    if (!m_blink.blink)
+                    {
+                        //無条件でダメージを受ける
+                        damage = true;
+
+                        //ダメージ計算を行う
+                        statusManager.OnDamageStatus(statusCs, blackStar.statusCs);
+                    }
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -232,63 +292,4 @@ public class SpiralStar : StarBase
     /// </summary>
     public Blink blink { get { return m_blink; } }
 
-    /// <summary>
-    /// 当たった瞬間を検知する
-    /// </summary>
-    /// <param name="collision">当たったオブジェクトの情報</param>
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        //BlackStarに衝突した場合
-        if(collision.gameObject.tag == BlackStar.BLACKSTAR_TAG)
-        {
-            //StarChargeUIを取得する
-            StarChaegeUI starChaegeUI = StarChaegeUI.Instance;
-
-            //StatusManagerを取得する
-            StatusManager statusManager = StatusManager.Instance;
-
-           //アタッチされているスクリプトを取得する
-            BlackStar blackStar = collision.gameObject.GetComponent<BalanStar>();
-
-            //自身が攻撃中の時(チャージ中の時は起動しない)
-            if (m_stateMachine.currentState == m_spiralMove)
-            {
-                //自身のパワーが規定値以上の場合
-                if (starChaegeUI.power >= DAMAGE_MIN_POWER)
-                {
-                    //敵を倒す
-                    blackStar.deth = true;
-                }
-                //パワーが足りないとき
-                else
-                {
-                    //ダメージを受けていないとき
-                    if (!m_blink.blink)
-                    {
-                        //自分がダメージを受ける
-                        damage = true;
-
-                        //ダメージ計算を行う
-                       statusManager.OnDamageStatus(statusCs, blackStar.statusCs);
-                    }
-                }
-            }
-            else
-            {
-                //自身がチャージ中の時
-                if (m_stateMachine.currentState == m_spiralRotation)
-                {
-                    //ダメージを受けていないとき
-                    if (!m_blink.blink)
-                    {
-                        //無条件でダメージを受ける
-                        damage = true;
-
-                        //ダメージ計算を行う
-                        statusManager.OnDamageStatus(statusCs, blackStar.statusCs);
-                    }
-                }
-            }
-        }
-    }
 }

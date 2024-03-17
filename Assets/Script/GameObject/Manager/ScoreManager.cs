@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class ScoreManager : Singleton<ScoreManager>
 {
+    /// <summary>
+    /// 倒して得られるスコアの値
+    /// Inspecterから編集できるようにする
+    /// </summary>
+    [SerializeField]
+    private float m_getScore = 0.0f;
+
     // Start is called before the first frame update
     void Start()
     {

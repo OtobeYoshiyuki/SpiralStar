@@ -42,6 +42,18 @@ public abstract class StarBase : Movement, IStarBase
     public const string DEFENCE = "Defence";
 
     /// <summary>
+    /// スコアの最大値
+    /// 定数
+    /// </summary>
+    public const float MAX_SCORE = 99999999;
+
+    /// <summary>
+    /// スコアの最小値
+    /// 定数
+    /// </summary>
+    public const float MIN_SCORE = 0;
+
+    /// <summary>
     /// Stateの時間を計測する時間
     /// </summary>
     private float m_time = 0.0f;
@@ -57,9 +69,19 @@ public abstract class StarBase : Movement, IStarBase
     private bool m_dethCheck = false;
 
     /// <summary>
+    /// キャラを識別するためのID
+    /// </summary>
+    private int m_id = 0;
+
+    /// <summary>
     /// ステータスのコントローラー
     /// </summary>
     private StatusController m_statusCs = new StatusController();
+
+    /// <summary>
+    /// スコアのコントローラ
+    /// </summary>
+    private ScoreController m_scoreCs = new ScoreController();
 
     /// <summary>
     /// コンストラクタ
@@ -86,6 +108,9 @@ public abstract class StarBase : Movement, IStarBase
 
         //ステータスをコントローラーに渡す
         m_statusCs.AddStatuses(infos);
+
+        //スコアの初期化
+        m_scoreCs.InitScore(false, 0.0f, 1.0f, MAX_SCORE, MIN_SCORE, 0.0f, 0.0f, 0.0f);
     }
 
     //更新処理
@@ -138,8 +163,24 @@ public abstract class StarBase : Movement, IStarBase
     }
 
     /// <summary>
+    /// id（識別番号）
+    /// ゲッター　セッター
+    /// </summary>
+    public int id
+    {
+        get { return m_id; }
+        set { m_id = value; }
+    }
+
+    /// <summary>
     /// ステータスのコントローラーを取得する
     /// ゲッター
     /// </summary>
     public StatusController statusCs { get { return m_statusCs; } }
+
+    /// <summary>
+    /// スコアのコントローラーを取得する
+    /// ゲッター
+    /// </summary>
+    public ScoreController scoreCs { get { return m_scoreCs; } }
 }
